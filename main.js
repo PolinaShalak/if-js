@@ -21,3 +21,4 @@ for (let i = 1; i < array1.length; i++) {
     productOfNumbers *= array1[i];
 }
 console.log(productOfNumbers);
+
