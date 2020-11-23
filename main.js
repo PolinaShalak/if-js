@@ -85,11 +85,15 @@ for (let i = 0; i < 10; i++) {
 }
 console.log(array3);
 
-for (let i = 0; i < array3.length; i++) {
-  let b = String(array3[i]);
-  if (b.endsWith('0')) {
-    b = b.replaceAll('0', 'zero');
-    array3[i] = b;
+function changeZero(array) {
+  const array5 = array;
+  for (let i = 0; i < array5.length; i++) {
+    let b = String(array5[i]);
+    if (b.endsWith('0')) {
+      b = b.replaceAll('0', 'zero');
+      array5[i] = b;
+    }
   }
+  return array5;
 }
-console.log(array3);
+console.log(changeZero(array3));
