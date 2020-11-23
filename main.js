@@ -79,11 +79,15 @@ function max1(a, y) {
 console.log(max1(22, 5));
 
 // функция, которая заменяет все 0 на строку 'zero'
-const array3 = [];
-for (let i = 0; i < 10; i++) {
-  array3[i] = Math.floor(Math.random() * 101);
+function createRandomArray() {
+  const array3 = [];
+  for (let i = 0; i < 10; i++) {
+    array3[i] = Math.floor(Math.random() * 101);
+  }
+  return array3;
 }
-console.log(array3);
+const arrayRandom = createRandomArray();
+console.log(arrayRandom);
 
 function changeZero(array) {
   const array5 = array;
@@ -96,4 +100,4 @@ function changeZero(array) {
   }
   return array5;
 }
-console.log(changeZero(array3));
+console.log(changeZero(arrayRandom));
