@@ -104,11 +104,11 @@ console.log(changeZero(arrayRandom));
 
 // функция сложения с замыканием
 function sum3(a) {
-  return function(b) {
+  return function (b) {
     return a + b;
   };
 }
-console.log( sum3(4)(10) ); // 14
+console.log(sum3(4)(10)); // 14
 
 // абзацы меняют цвета из массива по клику
 const text1El = document.getElementById('text1');
@@ -118,13 +118,10 @@ const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 let count = 0;
 text1El.addEventListener('click', () => {
   text1El.style.color = colors[count++];
-})
+});
 text2El.addEventListener('click', () => {
   text2El.style.color = colors[count++];
-})
+});
 text3El.addEventListener('click', () => {
   text3El.style.color = colors[count++];
-})
-
-
-
+});
