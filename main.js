@@ -115,13 +115,15 @@ const text1El = document.getElementById('text1');
 const text2El = document.getElementById('text2');
 const text3El = document.getElementById('text3');
 const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-let count = 0;
+let count1 = 0;
+let count2 = 0;
+let count3 = 0;
 text1El.addEventListener('click', () => {
-  text1El.style.color = colors[count++];
+  text1El.style.color = colors[count1++];
 });
 text2El.addEventListener('click', () => {
-  text2El.style.color = colors[count++];
+  text2El.style.color = colors[count2++];
 });
 text3El.addEventListener('click', () => {
-  text3El.style.color = colors[count++];
+  text3El.style.color = colors[count3++];
 });
