@@ -110,33 +110,20 @@ function sum3(a) {
 }
 console.log(sum3(4)(10)); // 14
 
-// абзацы меняют цвета из массива по клику
-const text1El = document.getElementById('text1');
-const text2El = document.getElementById('text2');
-const text3El = document.getElementById('text3');
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-
-function count() {
-  let callNumber = 0;
-  return function () {
-    if (callNumber < 5) {
-      return callNumber++;
-    }
-    callNumber = 0;
-    return callNumber;
-  };
-}
-
-const count1 = count();
-const count2 = count();
-const count3 = count();
-
-text1El.addEventListener('click', () => {
-  text1El.style.color = colors[count1()];
-});
-text2El.addEventListener('click', () => {
-  text2El.style.color = colors[count2()];
-});
-text3El.addEventListener('click', () => {
-  text3El.style.color = colors[count3()];
-});
+// // абзацы меняют цвета из массива по клику
+// const text1El = document.getElementById('text1');
+// const text2El = document.getElementById('text2');
+// const text3El = document.getElementById('text3');
+// const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+//
+// const count = () => {
+//   let callNumber = 0;
+//   return (event) => {
+//     event.target.style.color = colors[callNumber];
+//     callNumber = callNumber > 3 ? 0 : callNumber + 1;
+//   };
+// };
+//
+// text1El.addEventListener('click', count());
+// text2El.addEventListener('click', count());
+// text3El.addEventListener('click', count());
