@@ -101,3 +101,29 @@ function changeZero(array) {
   return array5;
 }
 console.log(changeZero(arrayRandom));
+
+// функция сложения с замыканием
+function sum3(a) {
+  return function (b) {
+    return a + b;
+  };
+}
+console.log(sum3(4)(10)); // 14
+
+// // абзацы меняют цвета из массива по клику
+const text1El = document.getElementById('text1');
+const text2El = document.getElementById('text2');
+const text3El = document.getElementById('text3');
+const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+
+const count = () => {
+  let callNumber = 0;
+  return (event) => {
+    event.target.style.color = colors[callNumber];
+    callNumber = callNumber > 3 ? 0 : callNumber + 1;
+  };
+};
+
+text1El.addEventListener('click', count());
+text2El.addEventListener('click', count());
+text3El.addEventListener('click', count());

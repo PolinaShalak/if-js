@@ -13,5 +13,6 @@ module.exports = {
   },
   rules: {
     ['no-plusplus']: 0,
+    ['no-param-reassign']: 0,
   },
 };
