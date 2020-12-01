@@ -127,3 +127,8 @@ const count = () => {
 text1El.addEventListener('click', count());
 text2El.addEventListener('click', count());
 text3El.addEventListener('click', count());
+
+// преобразование формата даты из '2020-11-26' в '26.11.2020'
+const date = '2020-11-26';
+const dateReverse = (date1) => date1.split('-').reverse().join('.');
+console.log(dateReverse(date));
