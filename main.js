@@ -127,3 +127,68 @@ const count = () => {
 text1El.addEventListener('click', count());
 text2El.addEventListener('click', count());
 text3El.addEventListener('click', count());
+
+// преобразование формата даты из '2020-11-26' в '26.11.2020'
+const date = '2020-11-26';
+const dateReverse = (date1) => date1.split('-').reverse().join('.');
+console.log(dateReverse(date));
+
+// поиск объектов размещения
+const data = [
+  {
+    country: 'Russia',
+    city: 'Saint Petersburg',
+    hotel: 'Hotel Leopold',
+  },
+  {
+    country: 'Spain',
+    city: 'Santa Cruz de Tenerife',
+    hotel: 'Apartment Sunshine',
+  },
+  {
+    country: 'Slowakia',
+    city: 'Vysokie Tatry',
+    hotel: 'Villa Kunerad',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hostel Friendship',
+  },
+  {
+    country: 'Indonesia',
+    city: 'Bali',
+    hotel: 'Ubud Bali Resort&SPA',
+  },
+  {
+    country: 'Netherlands',
+    city: 'Rotterdam',
+    hotel: 'King Kong Hostel',
+  },
+  {
+    country: 'Marocco',
+    city: 'Ourika',
+    hotel: 'Rokoko Hotel',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hotel Rehberge Berlin Mitte',
+  },
+];
+
+const checkData = (str) => {
+  const reg = new RegExp(str.trim(), 'gi');
+  return data.filter((el) => (reg.test(el.country) || reg.test(el.city) || reg.test(el.hotel)));
+};
+
+const search = (str) => {
+  const arraySearch = checkData(str);
+  if (arraySearch.length > 0) {
+    for (let i = 0; i < arraySearch.length; i++) {
+      console.log(`Страна: ${arraySearch[i].country}\nГород: ${arraySearch[i].city}\nОтель: ${arraySearch[i].hotel}`);
+    }
+  } else console.log('Ничего не найдено');
+};
+
+search('Germany');
