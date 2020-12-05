@@ -192,3 +192,20 @@ const search = (str) => {
 };
 
 search('Germany');
+
+// календарь
+// const daysInMonth = 30;
+// const daysInWeek = 7;
+// const dayOfWeek = 4;
+// const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+
+const getCalendarMonth = (daysInMonth) => {
+  const calendarArray = [];
+  if (daysInMonth > 0) {
+    for (let i = 1; i <= daysInMonth; i++) {
+      calendarArray.push(i);
+    }
+  }
+  return calendarArray;
+};
+console.log(getCalendarMonth(30));
