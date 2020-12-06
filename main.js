@@ -196,16 +196,33 @@ search('Germany');
 // календарь
 // const daysInMonth = 30;
 // const daysInWeek = 7;
-// const dayOfWeek = 4;
+//
 // const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
 
-const getCalendarMonth = (daysInMonth) => {
+const getCalendarMonth = (daysInMonth, daysInWeek) => {
   const calendarArray = [];
-  if (daysInMonth > 0) {
-    for (let i = 1; i <= daysInMonth; i++) {
-      calendarArray.push(i);
+  let weekArray = [];
+  // const BeginningOfArray = dayOfWeek - daysInWeek;
+  // let i = 1;
+  // if (daysInMonth >= 7) {
+  // for (; i <= daysInWeek; i++) {
+  // weekArray.push(i);
+  // calendarArray.push(weekArray);
+  // }
+  for (let i = 1; i <= daysInMonth; i++) {
+    weekArray.push(i);
+    if (weekArray.length === daysInWeek) {
+      calendarArray.push(weekArray);
+      weekArray = [];
     }
+  }
+  if (weekArray.length < daysInWeek) {
+    calendarArray.push(weekArray);
+  }
+  for (let i = 1; weekArray.length !== daysInWeek; i++) {
+    weekArray.push(i);
   }
   return calendarArray;
 };
-console.log(getCalendarMonth(30));
+
+console.log(getCalendarMonth(30, 7));
