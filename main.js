@@ -177,7 +177,35 @@ const data = [
   },
 ];
 
-const checkData = (str) => {
+// поиск - 1
+/* const search = str => {
+  const result = [];
+  for (let i = 0; i < data.length; i++) {
+    const object = data[i];
+    if (object.country.includes(str) || object.city.includes(str) || object.hotel.includes(str)) {
+      result[result.length] = `${object.country}, ${object.city}, ${object.hotel}`;
+    }
+  }
+  return result;
+}
+console.log(search('Russia'));
+ */
+
+// поиск - 2
+/* const search = str => {
+  const result = [];
+  data.forEach(object => {
+    if (object.country.includes(str) || object.city.includes(str) || object.hotel.includes(str)) {
+      result[result.length] = `${object.country}, ${object.city}, ${object.hotel}`;
+    }
+  })
+  return result;
+}
+console.log(search('Russia'));
+ */
+
+// поиск - 3
+/* const checkData = (str) => {
   const reg = new RegExp(str.trim(), 'gi');
   return data.filter((el) => (reg.test(el.country) || reg.test(el.city) || reg.test(el.hotel)));
 };
@@ -186,9 +214,92 @@ const search = (str) => {
   const arraySearch = checkData(str);
   if (arraySearch.length > 0) {
     for (let i = 0; i < arraySearch.length; i++) {
-      console.log(`Страна: ${arraySearch[i].country}\nГород: ${arraySearch[i].city}\nОтель: ${arraySearch[i].hotel}`);
+      console.log(Страна: ${arraySearch[i].country}\nГород: ${arraySearch[i].city}\nОтель:
+      ${arraySearch[i].hotel}`);
     }
   } else console.log('Ничего не найдено');
 };
 
 search('Germany');
+ */
+
+// поиск - 4
+const replaceStrForSearch = (str) => str.toLowerCase().replaceAll(' ', '');
+const search = (str) => {
+  const searchStr = replaceStrForSearch(str);
+  const result = [];
+
+  data.forEach((object) => {
+    const string = `${object.country}, ${object.city}, ${object.hotel}`;
+
+    if (replaceStrForSearch(string).includes(searchStr)) {
+      result.push(string);
+    }
+  });
+  return result;
+};
+
+console.log(search('Ber'));
+
+// календарь
+/* const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+  const calendarArray = [];
+  let weekArray = [];
+  if (dayOfWeek > 0) {
+    for (let i = daysInMonth - dayOfWeek + 1; i <= daysInMonth; i++) {
+      weekArray.push(i);
+    }
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    weekArray.push(i);
+    if (weekArray.length === daysInWeek) {
+      calendarArray.push(weekArray);
+      weekArray = [];
+    }
+  }
+  if (weekArray.length < daysInWeek) {
+    calendarArray.push(weekArray);
+  }
+  for (let i = 1; weekArray.length !== daysInWeek; i++) {
+    weekArray.push(i);
+  }
+  return calendarArray;
+};
+
+//console.log(getCalendarMonth(30, 7, 6));
+ */
+
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0) => {
+  if (dayOfWeek >= daysInWeek) {
+    throw new Error('Invalid data');
+  }
+  const daysWithoutTail = daysInMonth + dayOfWeek;
+  const iterations = daysWithoutTail + (daysInWeek - (daysWithoutTail % daysInWeek));
+  let currentDay = daysInMonth - dayOfWeek;
+  let subArrayIndex = 0;
+  const result = [];
+
+  for (let i = 0; i <= iterations; i++) {
+    if (!result[subArrayIndex]) {
+      result[subArrayIndex] = [];
+    }
+
+    if (result[subArrayIndex].length === daysInWeek) {
+      if (result[subArrayIndex][result[subArrayIndex].lenght - 1] === daysInMonth) {
+        break;
+      }
+      subArrayIndex += 1;
+      result[subArrayIndex] = [];
+    }
+    currentDay += 1;
+
+    if (currentDay > daysInMonth) {
+      currentDay = 1;
+    }
+    result[subArrayIndex].push(currentDay);
+  }
+  return result;
+};
+
+const calendarMonth = getCalendarMonth(30, 7, 1);
+console.log(calendarMonth);
