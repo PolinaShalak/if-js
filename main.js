@@ -275,7 +275,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0) => {
   }
   const daysWithoutTail = daysInMonth + dayOfWeek;
   const iterations = daysWithoutTail + (daysInWeek - (daysWithoutTail % daysInWeek));
-  let currentDay = daysInMonth - dayOfWeek;
+  let dayOfMonth = daysInMonth - dayOfWeek;
   let subArrayIndex = 0;
   const result = [];
 
@@ -291,13 +291,17 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0) => {
       subArrayIndex += 1;
       result[subArrayIndex] = [];
     }
-    currentDay += 1;
+    dayOfMonth += 1;
 
-    if (currentDay > daysInMonth) {
-      currentDay = 1;
+    if (dayOfMonth > daysInMonth) {
+      dayOfMonth = 1;
     }
-    result[subArrayIndex].push(currentDay);
+    result[subArrayIndex].push({dayOfMonth,
+      notCurrentMonth: true, // optional field - день не входит в текущий месяц
+      selectedDay: false,
+    });
   }
+
   return result;
 };
 
