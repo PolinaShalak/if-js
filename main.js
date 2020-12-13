@@ -269,7 +269,7 @@ console.log(search('Ber'));
 //console.log(getCalendarMonth(30, 7, 6));
  */
 
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0) => {
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0, checkInDate, checkOutDate) => {
   if (dayOfWeek >= daysInWeek) {
     throw new Error('Invalid data');
   }
@@ -296,14 +296,14 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0) => {
     if (dayOfMonth > daysInMonth) {
       dayOfMonth = 1;
     }
-    result[subArrayIndex].push({dayOfMonth,
-      notCurrentMonth: true, // optional field - день не входит в текущий месяц
-      selectedDay: false,
+    result[subArrayIndex].push({
+      dayOfMonth,
+      notCurrentMonth: true,
+      selectedDay: (dayOfMonth >= checkInDate && dayOfMonth <= checkOutDate),
     });
   }
-
   return result;
 };
 
-const calendarMonth = getCalendarMonth(30, 7, 1);
+const calendarMonth = getCalendarMonth(30, 7, 1, 6, 12);
 console.log(calendarMonth);
