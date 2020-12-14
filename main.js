@@ -242,16 +242,25 @@ const search = (str) => {
 console.log(search('Ber'));
 
 // календарь
-/* const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
+  if (dayOfWeek >= daysInWeek) {
+    throw new Error('Invalid data');
+  }
   const calendarArray = [];
   let weekArray = [];
   if (dayOfWeek > 0) {
     for (let i = daysInMonth - dayOfWeek + 1; i <= daysInMonth; i++) {
-      weekArray.push(i);
+      weekArray.push({
+        dayOfMonth: i,
+        notCurrentMonth: true,
+      });
     }
   }
   for (let i = 1; i <= daysInMonth; i++) {
-    weekArray.push(i);
+    weekArray.push({
+      dayOfMonth: i,
+      selectedDay: (i >= checkInDate && i <= checkOutDate),
+    });
     if (weekArray.length === daysInWeek) {
       calendarArray.push(weekArray);
       weekArray = [];
@@ -261,15 +270,18 @@ console.log(search('Ber'));
     calendarArray.push(weekArray);
   }
   for (let i = 1; weekArray.length !== daysInWeek; i++) {
-    weekArray.push(i);
+    weekArray.push({
+      dayOfMonth: i,
+      notCurrentMonth: true,
+    });
   }
   return calendarArray;
 };
 
-//console.log(getCalendarMonth(30, 7, 6));
- */
+console.log(getCalendarMonth(30, 7, 6, 5, 10));
 
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0, checkInDate, checkOutDate) => {
+
+/* const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0, checkInDate, checkOutDate) => {
   if (dayOfWeek >= daysInWeek) {
     throw new Error('Invalid data');
   }
@@ -307,3 +319,5 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0, checkInDate, c
 
 const calendarMonth = getCalendarMonth(30, 7, 1, 6, 12);
 console.log(calendarMonth);
+
+ */
