@@ -110,7 +110,7 @@ function sum3(a) {
 }
 console.log(sum3(4)(10)); // 14
 
-// // абзацы меняют цвета из массива по клику
+// абзацы меняют цвета из массива по клику
 const text1El = document.getElementById('text1');
 const text2El = document.getElementById('text2');
 const text3El = document.getElementById('text3');
@@ -177,53 +177,7 @@ const data = [
   },
 ];
 
-// поиск - 1
-/* const search = str => {
-  const result = [];
-  for (let i = 0; i < data.length; i++) {
-    const object = data[i];
-    if (object.country.includes(str) || object.city.includes(str) || object.hotel.includes(str)) {
-      result[result.length] = `${object.country}, ${object.city}, ${object.hotel}`;
-    }
-  }
-  return result;
-}
-console.log(search('Russia'));
- */
-
-// поиск - 2
-/* const search = str => {
-  const result = [];
-  data.forEach(object => {
-    if (object.country.includes(str) || object.city.includes(str) || object.hotel.includes(str)) {
-      result[result.length] = `${object.country}, ${object.city}, ${object.hotel}`;
-    }
-  })
-  return result;
-}
-console.log(search('Russia'));
- */
-
-// поиск - 3
-/* const checkData = (str) => {
-  const reg = new RegExp(str.trim(), 'gi');
-  return data.filter((el) => (reg.test(el.country) || reg.test(el.city) || reg.test(el.hotel)));
-};
-
-const search = (str) => {
-  const arraySearch = checkData(str);
-  if (arraySearch.length > 0) {
-    for (let i = 0; i < arraySearch.length; i++) {
-      console.log(Страна: ${arraySearch[i].country}\nГород: ${arraySearch[i].city}\nОтель:
-      ${arraySearch[i].hotel}`);
-    }
-  } else console.log('Ничего не найдено');
-};
-
-search('Germany');
- */
-
-// поиск - 4
+// поиск
 const replaceStrForSearch = (str) => str.toLowerCase().replaceAll(' ', '');
 const search = (str) => {
   const searchStr = replaceStrForSearch(str);
@@ -279,45 +233,3 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
 };
 
 console.log(getCalendarMonth(30, 7, 6, 5, 10));
-
-
-/* const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0, checkInDate, checkOutDate) => {
-  if (dayOfWeek >= daysInWeek) {
-    throw new Error('Invalid data');
-  }
-  const daysWithoutTail = daysInMonth + dayOfWeek;
-  const iterations = daysWithoutTail + (daysInWeek - (daysWithoutTail % daysInWeek));
-  let dayOfMonth = daysInMonth - dayOfWeek;
-  let subArrayIndex = 0;
-  const result = [];
-
-  for (let i = 0; i <= iterations; i++) {
-    if (!result[subArrayIndex]) {
-      result[subArrayIndex] = [];
-    }
-
-    if (result[subArrayIndex].length === daysInWeek) {
-      if (result[subArrayIndex][result[subArrayIndex].lenght - 1] === daysInMonth) {
-        break;
-      }
-      subArrayIndex += 1;
-      result[subArrayIndex] = [];
-    }
-    dayOfMonth += 1;
-
-    if (dayOfMonth > daysInMonth) {
-      dayOfMonth = 1;
-    }
-    result[subArrayIndex].push({
-      dayOfMonth,
-      notCurrentMonth: true,
-      selectedDay: (dayOfMonth >= checkInDate && dayOfMonth <= checkOutDate),
-    });
-  }
-  return result;
-};
-
-const calendarMonth = getCalendarMonth(30, 7, 1, 6, 12);
-console.log(calendarMonth);
-
- */
