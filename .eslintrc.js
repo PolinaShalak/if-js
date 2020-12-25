@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     ['no-plusplus']: 0,
     ['no-param-reassign']: 0,
+    ['max-classes-per-file']: 0,
   },
 };

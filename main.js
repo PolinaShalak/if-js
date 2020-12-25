@@ -233,3 +233,74 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
 };
 
 console.log(getCalendarMonth(30, 7, 6, 5, 10));
+
+// LESSON 8
+const studentsData = [
+  {
+    firstName: 'Василий',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Java',
+  },
+  {
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    admissionYear: 2018,
+    courseName: 'JavaScript',
+  },
+  {
+    firstName: 'Александр',
+    lastName: 'Федоров',
+    admissionYear: 2017,
+    courseName: 'Python',
+  },
+  {
+    firstName: 'Николай',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Android',
+  },
+];
+
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+class Student extends User {
+  constructor(firstName, lastName, admissionYear, courseName) {
+    super(firstName, lastName);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+
+  get course() {
+    return new Date().getFullYear() - this.admissionYear;
+  }
+}
+
+class Students {
+  constructor(students) {
+    this.students = students.map(({
+      firstName, lastName, admissionYear, courseName,
+    }) => (new Student(firstName, lastName, admissionYear, courseName)));
+  }
+
+  getInfo() {
+    const arrayStudents = this.students.sort((prev, next) => prev.course - next.course);
+    const array = [];
+    arrayStudents.forEach((item) => {
+      array.push(`${item.fullName} - ${item.courseName}, ${item.course} курс`);
+    });
+    return array;
+  }
+}
+
+const students = new Students(studentsData);
+console.log(students.getInfo());
