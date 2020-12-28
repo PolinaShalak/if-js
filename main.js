@@ -110,7 +110,7 @@ function sum3(a) {
 }
 console.log(sum3(4)(10)); // 14
 
-// // абзацы меняют цвета из массива по клику
+// абзацы меняют цвета из массива по клику
 const text1El = document.getElementById('text1');
 const text2El = document.getElementById('text2');
 const text3El = document.getElementById('text3');
@@ -177,53 +177,7 @@ const data = [
   },
 ];
 
-// поиск - 1
-/* const search = str => {
-  const result = [];
-  for (let i = 0; i < data.length; i++) {
-    const object = data[i];
-    if (object.country.includes(str) || object.city.includes(str) || object.hotel.includes(str)) {
-      result[result.length] = `${object.country}, ${object.city}, ${object.hotel}`;
-    }
-  }
-  return result;
-}
-console.log(search('Russia'));
- */
-
-// поиск - 2
-/* const search = str => {
-  const result = [];
-  data.forEach(object => {
-    if (object.country.includes(str) || object.city.includes(str) || object.hotel.includes(str)) {
-      result[result.length] = `${object.country}, ${object.city}, ${object.hotel}`;
-    }
-  })
-  return result;
-}
-console.log(search('Russia'));
- */
-
-// поиск - 3
-/* const checkData = (str) => {
-  const reg = new RegExp(str.trim(), 'gi');
-  return data.filter((el) => (reg.test(el.country) || reg.test(el.city) || reg.test(el.hotel)));
-};
-
-const search = (str) => {
-  const arraySearch = checkData(str);
-  if (arraySearch.length > 0) {
-    for (let i = 0; i < arraySearch.length; i++) {
-      console.log(Страна: ${arraySearch[i].country}\nГород: ${arraySearch[i].city}\nОтель:
-      ${arraySearch[i].hotel}`);
-    }
-  } else console.log('Ничего не найдено');
-};
-
-search('Germany');
- */
-
-// поиск - 4
+// поиск
 const replaceStrForSearch = (str) => str.toLowerCase().replaceAll(' ', '');
 const search = (str) => {
   const searchStr = replaceStrForSearch(str);
@@ -242,16 +196,25 @@ const search = (str) => {
 console.log(search('Ber'));
 
 // календарь
-/* const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
+  if (dayOfWeek >= daysInWeek) {
+    throw new Error('Invalid data');
+  }
   const calendarArray = [];
   let weekArray = [];
   if (dayOfWeek > 0) {
     for (let i = daysInMonth - dayOfWeek + 1; i <= daysInMonth; i++) {
-      weekArray.push(i);
+      weekArray.push({
+        dayOfMonth: i,
+        notCurrentMonth: true,
+      });
     }
   }
   for (let i = 1; i <= daysInMonth; i++) {
-    weekArray.push(i);
+    weekArray.push({
+      dayOfMonth: i,
+      selectedDay: (i >= checkInDate && i <= checkOutDate),
+    });
     if (weekArray.length === daysInWeek) {
       calendarArray.push(weekArray);
       weekArray = [];
@@ -261,45 +224,83 @@ console.log(search('Ber'));
     calendarArray.push(weekArray);
   }
   for (let i = 1; weekArray.length !== daysInWeek; i++) {
-    weekArray.push(i);
+    weekArray.push({
+      dayOfMonth: i,
+      notCurrentMonth: true,
+    });
   }
   return calendarArray;
 };
 
-//console.log(getCalendarMonth(30, 7, 6));
- */
+console.log(getCalendarMonth(30, 7, 6, 5, 10));
 
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek = 0) => {
-  if (dayOfWeek >= daysInWeek) {
-    throw new Error('Invalid data');
+// LESSON 8
+const studentsData = [
+  {
+    firstName: 'Василий',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Java',
+  },
+  {
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    admissionYear: 2018,
+    courseName: 'JavaScript',
+  },
+  {
+    firstName: 'Александр',
+    lastName: 'Федоров',
+    admissionYear: 2017,
+    courseName: 'Python',
+  },
+  {
+    firstName: 'Николай',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Android',
+  },
+];
+
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
-  const daysWithoutTail = daysInMonth + dayOfWeek;
-  const iterations = daysWithoutTail + (daysInWeek - (daysWithoutTail % daysInWeek));
-  let currentDay = daysInMonth - dayOfWeek;
-  let subArrayIndex = 0;
-  const result = [];
 
-  for (let i = 0; i <= iterations; i++) {
-    if (!result[subArrayIndex]) {
-      result[subArrayIndex] = [];
-    }
-
-    if (result[subArrayIndex].length === daysInWeek) {
-      if (result[subArrayIndex][result[subArrayIndex].lenght - 1] === daysInMonth) {
-        break;
-      }
-      subArrayIndex += 1;
-      result[subArrayIndex] = [];
-    }
-    currentDay += 1;
-
-    if (currentDay > daysInMonth) {
-      currentDay = 1;
-    }
-    result[subArrayIndex].push(currentDay);
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
   }
-  return result;
-};
+}
 
-const calendarMonth = getCalendarMonth(30, 7, 1);
-console.log(calendarMonth);
+class Student extends User {
+  constructor(firstName, lastName, admissionYear, courseName) {
+    super(firstName, lastName);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+
+  get course() {
+    return new Date().getFullYear() - this.admissionYear;
+  }
+}
+
+class Students {
+  constructor(students) {
+    this.students = students.map(({
+      firstName, lastName, admissionYear, courseName,
+    }) => (new Student(firstName, lastName, admissionYear, courseName)));
+  }
+
+  getInfo() {
+    const arrayStudents = this.students.sort((prev, next) => prev.course - next.course);
+    const array = [];
+    arrayStudents.forEach((item) => {
+      array.push(`${item.fullName} - ${item.courseName}, ${item.course} курс`);
+    });
+    return array;
+  }
+}
+
+const students = new Students(studentsData);
+console.log(students.getInfo());
