@@ -111,22 +111,22 @@ function sum3(a) {
 console.log(sum3(4)(10)); // 14
 
 // абзацы меняют цвета из массива по клику
-const text1El = document.getElementById('text1');
-const text2El = document.getElementById('text2');
-const text3El = document.getElementById('text3');
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-
-const count = () => {
-  let callNumber = 0;
-  return (event) => {
-    event.target.style.color = colors[callNumber];
-    callNumber = callNumber > 3 ? 0 : callNumber + 1;
-  };
-};
-
-text1El.addEventListener('click', count());
-text2El.addEventListener('click', count());
-text3El.addEventListener('click', count());
+// const text1El = document.getElementById('text1');
+// const text2El = document.getElementById('text2');
+// const text3El = document.getElementById('text3');
+// const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+//
+// const count = () => {
+//   let callNumber = 0;
+//   return (event) => {
+//     event.target.style.color = colors[callNumber];
+//     callNumber = callNumber > 3 ? 0 : callNumber + 1;
+//   };
+// };
+//
+// text1El.addEventListener('click', count());
+// text2El.addEventListener('click', count());
+// text3El.addEventListener('click', count());
 
 // преобразование формата даты из '2020-11-26' в '26.11.2020'
 const date = '2020-11-26';
@@ -195,6 +195,13 @@ const search = (str) => {
 
 console.log(search('Ber'));
 
+const currentMonth = new Date().getMonth();
+const currentYear = new Date().getFullYear();
+const currentDay = new Date().getDate();
+let dayOfWeeks = new Date(currentYear, currentMonth, 1).getDay();
+dayOfWeeks = dayOfWeeks === 0 ? 7 : dayOfWeeks;
+const allDaysInMoth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
 // календарь
 const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
   if (dayOfWeek >= daysInWeek) {
@@ -203,7 +210,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
   const calendarArray = [];
   let weekArray = [];
   if (dayOfWeek > 0) {
-    for (let i = daysInMonth - dayOfWeek + 1; i <= daysInMonth; i++) {
+    for (let i = daysInMonth - dayOfWeek + 2; i <= daysInMonth; i++) {
       weekArray.push({
         dayOfMonth: i,
         notCurrentMonth: true,
@@ -214,14 +221,15 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
     weekArray.push({
       dayOfMonth: i,
       selectedDay: (i >= checkInDate && i <= checkOutDate),
+      currentDay: (i === currentDay),
     });
     if (weekArray.length === daysInWeek) {
       calendarArray.push(weekArray);
       weekArray = [];
     }
   }
-  if (weekArray.length < daysInWeek) {
-    calendarArray.push(weekArray);
+  if (weekArray.length === 0) {
+    return calendarArray;
   }
   for (let i = 1; weekArray.length !== daysInWeek; i++) {
     weekArray.push({
@@ -232,7 +240,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
   return calendarArray;
 };
 
-console.log(getCalendarMonth(30, 7, 6, 5, 10));
+console.log(getCalendarMonth(allDaysInMoth, 7, dayOfWeeks, 5, 10));
 
 // LESSON 8
 const studentsData = [
@@ -304,3 +312,32 @@ class Students {
 
 const students = new Students(studentsData);
 console.log(students.getInfo());
+
+// абзацы меняют цвета из массива по клику
+const text1El = document.getElementById('text1');
+const text2El = document.getElementById('text2');
+const text3El = document.getElementById('text3');
+const colors = {
+  color: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+  [Symbol.iterator]() {
+    return this;
+  },
+  next(count) {
+    return {
+      value: this.color[count],
+      done: false,
+    };
+  },
+};
+
+const count = () => {
+  let callNumber = 0;
+  return (event) => {
+    event.target.style.color = colors.next(callNumber).value;
+    callNumber = callNumber > 3 ? 0 : callNumber + 1;
+  };
+};
+
+text1El.addEventListener('click', count());
+text2El.addEventListener('click', count());
+text3El.addEventListener('click', count());
