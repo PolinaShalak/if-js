@@ -1,0 +1,138 @@
+@import "fonts.css";
+
+:root {
+    --primary: #3077c6;
+    --primary-dark: #10367c;
+    --secondary: #f5bd41;
+    --white: #ffffff;
+    --primary-text: #383838;
+    --secondary-text: #bfbfbf;
+    --gray100: #121212;
+    --gray200: #1d1e1f;
+    --gray300: #4d4d4d;
+    --background-gray: #eaf0f9;
+
+    --col-size: calc(100% / 12);
+
+    --line-width: 100px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+}
+
+.col-1 {
+    width: var(--col-size);
+}
+
+.col-2 {
+    width: calc(var(--col-size) * 2);
+}
+
+.col-3 {
+    width: calc(var(--col-size) * 3);
+}
+
+.col-4 {
+    width: calc(var(--col-size) * 4);
+}
+
+.col-5 {
+    width: calc(var(--col-size) * 5);
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: calc(var(--col-size) * 7);
+}
+
+.col-8 {
+    width: calc(var(--col-size) * 8);
+}
+
+.col-9 {
+    width: calc(var(--col-size) * 9);
+}
+
+.col-10 {
+    width: calc(var(--col-size) * 10);
+}
+
+.col-11 {
+    width: calc(var(--col-size) * 11);
+}
+
+.col-12 {
+    width: 100%;
+}
+
+[class*='row'] {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
+
+[class*='col'] {
+    flex-grow: 0;
+    padding: 0 8px;
+    fill: var(--primary);
+}
+
+.container {
+    max-width: 1264px;
+    margin: 0 auto;
+    padding: 120px 16px;
+}
+
+/* Homes */
+
+.homes{
+    background-color: var(--background-gray);
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 107px;
+    font-weight: 500;
+    font-size: 40px;
+    text-align: center;
+}
+
+.row {
+    font-size: 24px;
+    position: relative;
+}
+
+.homes__images {
+    width: 100%;
+    height: 69%;
+    margin-bottom: 12px;
+}
+
+.homes__link {
+    color: var(--primary);
+}
+
+.homes__text {
+    padding-top: 24px;
+    color: var(--secondary-text);
+}
+
+[class*='__svg_arrow'] {
+    fill: none;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+}
+
+.homes__svg_arrow {
+    top: 30%;
+    right: -1%;
+}
