@@ -369,4 +369,15 @@ const dataHomes = [
   },
 ];
 
-console.log(dataHomes);
+const homesElements = document.getElementById('homes-cards');
+
+dataHomes.forEach(item => {
+   const el = document.createElement('div');
+   el.classList.add('col-3');
+   el.innerHTML = `
+   <img class="homes__images" src="${item.imageUrl}" alt="${item.name}">
+   <a class="homes__link" href="">${item.name}</a>
+   <p class="homes__text">${item.city}, ${item.country}</p>
+   `;
+  homesElements.appendChild(el);
+})
