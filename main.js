@@ -341,3 +341,43 @@ const count = () => {
 text1El.addEventListener('click', count());
 text2El.addEventListener('click', count());
 text3El.addEventListener('click', count());
+
+const dataHomes = [
+  {
+    name: 'Hotel Leopold',
+    city: 'Saint Petersburg',
+    country: 'Russia',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
+  },
+  {
+    name: 'Apartment Sunshine',
+    city: 'Santa  Cruz de Tenerife',
+    country: 'Spain',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
+  },
+  {
+    name: 'Villa Kunerad',
+    city: 'Vysokie Tatry',
+    country: 'Slowakia',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
+  },
+  {
+    name: 'Hostel Friendship',
+    city: 'Berlin',
+    country: 'Germany',
+    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
+  },
+];
+
+const homesElements = document.getElementById('homes-cards');
+
+dataHomes.forEach(item => {
+   const el = document.createElement('div');
+   el.classList.add('col-3');
+   el.innerHTML = `
+   <img class="homes__images" src="${item.imageUrl}" alt="${item.name}">
+   <a class="homes__link" href="">${item.name}</a>
+   <p class="homes__text">${item.city}, ${item.country}</p>
+   `;
+  homesElements.appendChild(el);
+})
