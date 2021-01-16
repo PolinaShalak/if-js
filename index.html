@@ -51,6 +51,9 @@
     <symbol id="arrow" viewBox="0 0 48 48">
         <g filter="url(#filter0_d)"><circle cx="24" cy="20" r="20" fill="#F3F3F4"/><path d="M19.941 29.823l6.159-8.211a2 2 0 000-2.4L19.941 11" stroke="#383838" stroke-width="2"/></g><defs><filter id="filter0_d" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="4"/><feGaussianBlur stdDeviation="2"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter></defs>
     </symbol>
+    <symbol id="arrow-calendar" viewBox="0 0 8 18">
+    <path d="M1 17l5.1-6.8a2 2 0 000-2.4L1 1" stroke="#BFBFBF" stroke-width="2"/>
+    </symbol>
     <symbol id="close" viewBox="0 0 26 26">
         <path d="M26 1.486L24.514 0 13 11.514 1.486 0 0 1.486 11.514 13 0 24.514 1.486 26 13 14.486 24.514 26 26 24.514 14.486 13 26 1.486z" />
     </symbol>
@@ -58,6 +61,129 @@
         <circle cx="43" cy="43" r="43" fill="#fff"/><path d="M46.652 55.748c0-2.056.511-4.03 1.473-5.79a54.137 54.137 0 00-2.782-1.472.362.362 0 01-.205-.338v-8.08a3.776 3.776 0 001.688-3.141v-8.378A7.55 7.55 0 0039.276 21h-1.8a7.55 7.55 0 00-7.549 7.55v8.377c0 1.31.675 2.465 1.688 3.14v8.081a.38.38 0 01-.205.338c-1.155.562-6.75 3.386-11.937 7.651A4.04 4.04 0 0018 59.277v5.739h32.979a10.52 10.52 0 01-.788-.726 12.01 12.01 0 01-3.54-8.542z" fill="#3077C6"/><path d="M58.732 46.48c-5.114 0-9.267 4.154-9.267 9.268 0 5.115 4.153 9.268 9.267 9.268 5.115 0 9.268-4.153 9.268-9.268a9.266 9.266 0 00-9.268-9.267zM64.154 57.1h-4.071v4.07h-2.7V57.1H53.31v-2.701h4.071v-4.071h2.7v4.071h4.072v2.7z" fill="#3077C6"/>
     </symbol>
 </svg>
+<header class="header">
+    <div class="container">
+        <div class="nav">
+            <svg class="logo">
+                <use href="#logo"></use>
+            </svg>
+            <div class="nav__menu">
+                <a class="nav__link--stays" href="">
+                    <span>Stays</span>
+                </a>
+                <a class="nav__link--attractions" href="">
+                    <span>Attractions</span>
+                </a>
+                <svg class="nav__svg--night">
+                    <use href="#night"></use>
+                </svg>
+                <svg class="nav__svg--account">
+                    <use href="#acount"></use>
+                </svg>
+                <svg class="nav__svg--menu">
+                    <use href="#menu"></use>
+                </svg>
+            </div>
+        </div>
+        <h1 class="h1">Discover stays<br>
+            to live, work or just relax</h1>
+        <div class="header__forms">
+            <div class="form__your-destination">
+                <svg class="search">
+                    <use href="#search"></use>
+                </svg>
+                <input id="city" class="form__input--your-destination" type="text" placeholder="New York">
+                <label for="city" class="form__label--your-destination form__labels_all">Your destination or hotel name</label>
+            </div>
+            <div class="form__check">
+                <div class="form__check-in">
+                    <input id="check-in" class="form__input--check-in form__input_all" type="text" placeholder="Tue 15 Sept">
+                    <label for="check-in" class="form__label--check-in form__labels_all">Check-in</label>
+                </div>
+                <div class="form__check-out">
+                    <input id="check-out" class="form__input--check-out form__input_all" type="text" placeholder="Sat 19 Sept">
+                    <label for="check-out" class="form__label--check-out form__labels_all">Check-out</label>
+                </div>
+                <div class="header__calendar">
+                    <div class="calendar__month">
+                        <svg class="calendar__arrow-back">
+                            <use href="#arrow-calendar"></use>
+                        </svg>
+                        <span class="calendar__month-name" id="month">
+                        </span>
+                        <span class="calendar__month-year">
+                            2021
+                        </span>
+                        <div class="calendar__day-of-week calendar-margin">
+                            <div class="cell">Mo</div>
+                            <div class="cell">Tu</div>
+                            <div class="cell">We</div>
+                            <div class="cell">Th</div>
+                            <div class="cell">Fr</div>
+                            <div class="cell">Sa</div>
+                            <div class="cell">Su</div>
+                        </div>
+                        <div id="calendar">
+
+                        </div>
+                    </div>
+                    <div class="calendar__month">
+                        <svg class="calendar__arrow-next">
+                            <use href="#arrow-calendar"></use>
+                        </svg>
+                             <span class="calendar__month-name" id="month-next">
+                             </span>
+                            <span class="calendar__month-year">
+                            2021
+                        </span>
+                        <div class="calendar__day-of-week calendar-margin">
+                            <div class="cell">Mo</div>
+                            <div class="cell">Tu</div>
+                            <div class="cell">We</div>
+                            <div class="cell">Th</div>
+                            <div class="cell">Fr</div>
+                            <div class="cell">Sa</div>
+                            <div class="cell">Su</div>
+                        </div>
+                        <div id="calendar-next">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form__people">
+                <div class="forms__adults ">
+                    <input id="adults" class="form__input--adults form3 form__input_all" type="text" placeholder="2">
+                    <label for="adults" class="form__label--people form__labels_all">Adults</label>
+                </div>
+                <div class="forms__children ">
+                    <input id="children" class="form__input--children form3 form__input_all" type="text" placeholder="0">
+                    <label for="children" class="form__label--people form__labels_all">Children</label>
+                </div>
+                <div class="forms__rooms ">
+                    <input id="rooms" class="form__input--rooms form3 form__input_all" type="text" placeholder="1">
+                    <label for="rooms" class="form__label--people form__labels_all">Room</label>
+                </div>
+            </div>
+            <div class="form__button">
+                <button class="form__button__text" type="submit">Search</button>
+            </div>
+        </div>
+        <div class="header__apps">
+            <div>
+                <svg class="header__google-play">
+                    <use href="#google-play"></use>
+                </svg>
+            </div>
+            <div>
+                <svg class="header__app-store">
+                    <use href="#app-store"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+</header>
 <div class="homes">
     <div class="container">
         <h2 class="title">Homes guests loves</h2>

@@ -195,15 +195,27 @@ const search = (str) => {
 
 console.log(search('Ber'));
 
-const currentMonth = new Date().getMonth();
+// календарь
 const currentYear = new Date().getFullYear();
 const currentDay = new Date().getDate();
-let dayOfWeeks = new Date(currentYear, currentMonth, 1).getDay();
-dayOfWeeks = dayOfWeeks === 0 ? 7 : dayOfWeeks;
-const allDaysInMoth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-// календарь
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
+const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
+  'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const monthNumber = new Date().getMonth();
+
+const getCalendarMonth = (daysInWeek, checkInDate, checkOutDate) => {
+  const daysInMonth = new Date(currentYear, monthNumber + 1, 0).getDate();
+  console.log(monthNumber, daysInMonth);
+  let dayOfWeek = new Date(currentYear, monthNumber, 1).getDay();
+  dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+
+  const nameOfMonth = document.getElementById('month');
+  nameOfMonth.textContent = `${arrayMonthName[monthNumber]}`;
+
+  const nameOfMonthNext = document.getElementById('month-next');
+  nameOfMonthNext.textContent = `${arrayMonthName[monthNumber + 1]}`;
+
   if (dayOfWeek >= daysInWeek) {
     throw new Error('Invalid data');
   }
@@ -222,6 +234,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
       dayOfMonth: i,
       selectedDay: (i >= checkInDate && i <= checkOutDate),
       currentDay: (i === currentDay),
+      currentMonth: monthNumber,
     });
     if (weekArray.length === daysInWeek) {
       calendarArray.push(weekArray);
@@ -237,10 +250,37 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
       notCurrentMonth: true,
     });
   }
+  calendarArray.push(weekArray);
   return calendarArray;
 };
 
-console.log(getCalendarMonth(allDaysInMoth, 7, dayOfWeeks, 5, 10));
+const currentMonthCalendar = getCalendarMonth(7, 5, 10);
+console.log(currentMonthCalendar);
+
+const nextMonthCalendar = getCalendarMonth(7, 5, 10);
+console.log(nextMonthCalendar);
+
+function createCalendarInHTML(item, calendarElements) {
+  const el = document.getElementById(calendarElements);
+  item.forEach((a) => {
+    const week = document.createElement('div');
+    week.classList.add('calendar__day-of-week');
+    a.forEach((b) => {
+      const day = document.createElement('div');
+      day.classList.add('cell');
+      if (b.notCurrentMonth) {
+        week.appendChild(day);
+      } else {
+        day.textContent = `${b.dayOfMonth}`;
+        week.appendChild(day);
+      }
+    });
+    el.appendChild(week);
+  });
+}
+
+createCalendarInHTML(currentMonthCalendar, 'calendar');
+createCalendarInHTML(nextMonthCalendar, 'calendar-next');
 
 // LESSON 8
 const studentsData = [
@@ -375,7 +415,7 @@ dataHomes.forEach((item) => {
   const el = document.createElement('div');
   el.classList.add('col-3');
   el.innerHTML = `
-   <img class="homes__images" src="${item.imageUrl}" alt="${item.name}">
+   <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
    <a class="homes__link" href="">${item.name}</a>
    <p class="homes__text">${item.city}, ${item.country}</p>
    `;
