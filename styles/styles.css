@@ -402,7 +402,7 @@ input::placeholder {
     margin-top: 10px;
 }
 
-.cell {
+[class*="cell"] {
     width: 35px;
     height: 35px;
     display: flex;
@@ -410,6 +410,14 @@ input::placeholder {
     justify-content: center;
     font-weight: 300;
     font-size: 14px;
+}
+
+.cell-days:hover {
+   background-color: var(--secondary-text);
+}
+
+.calendar__current-day {
+    color: var(--primary);
 }
 
 /* Homes */
@@ -456,4 +464,8 @@ input::placeholder {
 .homes__svg_arrow {
     top: 30%;
     right: -1%;
+}
+
+.display-none {
+    display: none;
 }

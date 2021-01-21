@@ -196,91 +196,142 @@ const search = (str) => {
 console.log(search('Ber'));
 
 // календарь
-const currentYear = new Date().getFullYear();
-const currentDay = new Date().getDate();
-
-const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
-  'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-const monthNumber = new Date().getMonth();
-
-const getCalendarMonth = (daysInWeek, checkInDate, checkOutDate) => {
-  const daysInMonth = new Date(currentYear, monthNumber + 1, 0).getDate();
-  console.log(monthNumber, daysInMonth);
-  let dayOfWeek = new Date(currentYear, monthNumber, 1).getDay();
-  dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
-
-  const nameOfMonth = document.getElementById('month');
-  nameOfMonth.textContent = `${arrayMonthName[monthNumber]}`;
-
-  const nameOfMonthNext = document.getElementById('month-next');
-  nameOfMonthNext.textContent = `${arrayMonthName[monthNumber + 1]}`;
-
-  if (dayOfWeek >= daysInWeek) {
-    throw new Error('Invalid data');
-  }
-  const calendarArray = [];
-  let weekArray = [];
-  if (dayOfWeek > 0) {
-    for (let i = daysInMonth - dayOfWeek + 2; i <= daysInMonth; i++) {
-      weekArray.push({
-        dayOfMonth: i,
-        notCurrentMonth: true,
-      });
-    }
-  }
-  for (let i = 1; i <= daysInMonth; i++) {
-    weekArray.push({
-      dayOfMonth: i,
-      selectedDay: (i >= checkInDate && i <= checkOutDate),
-      currentDay: (i === currentDay),
-      currentMonth: monthNumber,
-    });
-    if (weekArray.length === daysInWeek) {
-      calendarArray.push(weekArray);
-      weekArray = [];
-    }
-  }
-  if (weekArray.length === 0) {
-    return calendarArray;
-  }
-  for (let i = 1; weekArray.length !== daysInWeek; i++) {
-    weekArray.push({
-      dayOfMonth: i,
-      notCurrentMonth: true,
-    });
-  }
-  calendarArray.push(weekArray);
-  return calendarArray;
-};
-
-const currentMonthCalendar = getCalendarMonth(7, 5, 10);
-console.log(currentMonthCalendar);
-
-const nextMonthCalendar = getCalendarMonth(7, 5, 10);
-console.log(nextMonthCalendar);
-
-function createCalendarInHTML(item, calendarElements) {
-  const el = document.getElementById(calendarElements);
-  item.forEach((a) => {
-    const week = document.createElement('div');
-    week.classList.add('calendar__day-of-week');
-    a.forEach((b) => {
-      const day = document.createElement('div');
-      day.classList.add('cell');
-      if (b.notCurrentMonth) {
-        week.appendChild(day);
-      } else {
-        day.textContent = `${b.dayOfMonth}`;
-        week.appendChild(day);
-      }
-    });
-    el.appendChild(week);
-  });
-}
-
-createCalendarInHTML(currentMonthCalendar, 'calendar');
-createCalendarInHTML(nextMonthCalendar, 'calendar-next');
+// const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
+//   'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+//
+// const currentDay = new Date().getDate();
+//
+// let yearNumber = new Date().getFullYear();
+// const yearNow = new Date().getFullYear();
+//
+// const monthNow = new Date().getMonth();
+// let monthNumber = new Date().getMonth();
+//
+// const getCalendarMonth = (checkInDate, checkOutDate, monthNumber, elementID, yearNumber) => {
+//   if (monthNumber >= 12) {
+//     monthNumber = 0;
+//     yearNumber++;
+//   }
+//
+//   if (monthNumber < 0) {
+//     monthNumber = 11;
+//     yearNumber--;
+//   }
+//
+//   const daysInWeek = 7;
+//   const daysInMonth = new Date(yearNumber, monthNumber + 1, 0).getDate();
+//   let dayOfWeek = new Date(yearNumber, monthNumber, 1).getDay();
+//   dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+//
+//   const nameOfMonth = document.getElementById(elementID);
+//   nameOfMonth.textContent = `${arrayMonthName[monthNumber]} ${yearNumber}`;
+//
+//   if (dayOfWeek >= daysInWeek) {
+//     throw new Error('Invalid data');
+//   }
+//
+//   const calendarArray = [];
+//   let weekArray = [];
+//   if (dayOfWeek > 0) {
+//     for (let i = daysInMonth - dayOfWeek + 2; i <= daysInMonth; i++) {
+//       weekArray.push({
+//         dayOfMonth: i,
+//         notCurrentMonth: true,
+//       });
+//     }
+//   }
+//   for (let i = 1; i <= daysInMonth; i++) {
+//     weekArray.push({
+//       dayOfMonth: i,
+//       selectedDay: (i >= checkInDate && i <= checkOutDate),
+//       currentDay: (i === currentDay),
+//       currentMonth: monthNumber,
+//       numberYear: yearNumber,
+//     });
+//     if (weekArray.length === daysInWeek) {
+//       calendarArray.push(weekArray);
+//       weekArray = [];
+//     }
+//   }
+//   if (weekArray.length === 0) {
+//     return calendarArray;
+//   }
+//   for (let i = 1; weekArray.length !== daysInWeek; i++) {
+//     weekArray.push({
+//       dayOfMonth: i,
+//       notCurrentMonth: true,
+//     });
+//   }
+//   calendarArray.push(weekArray);
+//   return calendarArray;
+// };
+//
+//
+// //monthNumber+=2;
+// // console.log(monthNumber);
+// // currentYear +=1
+//
+// const currentMonthCalendar = function () {
+//    return getCalendarMonth(5, 10,
+//       monthNumber, 'month', yearNumber);
+// }
+//
+// const nextMonthCalendar =  function () {
+//   return getCalendarMonth(5, 10,
+//       monthNumber + 1, 'month-next', yearNumber);
+// }
+//
+// function createCalendarInHTML(item, calendarElements) {
+//   const el = document.getElementById(calendarElements);
+//   item.forEach((weeks) => {
+//     const week = document.createElement('div');
+//     week.classList.add('calendar__day-of-week');
+//     weeks.forEach((days) => {
+//       const day = document.createElement('div');
+//       if (days.notCurrentMonth) {
+//         day.classList.add('cell');
+//         week.appendChild(day);
+//         return;
+//       }
+//       day.classList.add('cell-days');
+//       if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
+//         day.textContent = `${days.dayOfMonth}`;
+//         day.classList.add('calendar__current-day');
+//         week.appendChild(day);
+//       } else {
+//         day.textContent = `${days.dayOfMonth}`;
+//         week.appendChild(day);
+//       }
+//     });
+//     el.appendChild(week);
+//   });
+// }
+//
+// createCalendarInHTML(currentMonthCalendar(), 'calendar');
+// createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+//
+//
+//
+// const deleteCalendar = () => {
+//   const calendarEl = document.getElementById('calendar');
+//   const calendarNextEl = document.getElementById('calendar-next');
+//   document.body.removeChild(calendarEl);
+//   document.body.removeChild(calendarNextEl);
+// }
+//
+//
+// const calendarArrowNext = document.getElementById('calendar__arrow-next');
+// console.log(calendarArrowNext);
+//
+// function addClick() {
+//   monthNumber++;
+//   console.log(monthNumber);
+//   deleteCalendar();
+//   createCalendarInHTML(currentMonthCalendar(), 'calendar');
+//   createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+// }
+//
+// calendarArrowNext.addEventListener("click", addClick);
 
 // LESSON 8
 const studentsData = [
@@ -382,42 +433,34 @@ text1El.addEventListener('click', count());
 text2El.addEventListener('click', count());
 text3El.addEventListener('click', count());
 
-const dataHomes = [
-  {
-    name: 'Hotel Leopold',
-    city: 'Saint Petersburg',
-    country: 'Russia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
-  },
-  {
-    name: 'Apartment Sunshine',
-    city: 'Santa  Cruz de Tenerife',
-    country: 'Spain',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
-  },
-  {
-    name: 'Villa Kunerad',
-    city: 'Vysokie Tatry',
-    country: 'Slowakia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
-  },
-  {
-    name: 'Hostel Friendship',
-    city: 'Berlin',
-    country: 'Germany',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
-  },
-];
-
 const homesElements = document.getElementById('homes-cards');
 
-dataHomes.forEach((item) => {
-  const el = document.createElement('div');
-  el.classList.add('col-3');
-  el.innerHTML = `
+fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+  .then((response) => response.json())
+  .then((dataHomes) => dataHomes.forEach((item, index) => {
+    const el = document.createElement('div');
+    el.classList.add('col-3');
+    el.innerHTML = `
    <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
    <a class="homes__link" href="">${item.name}</a>
    <p class="homes__text">${item.city}, ${item.country}</p>
    `;
-  homesElements.appendChild(el);
-});
+    homesElements.appendChild(el);
+    if (index > 3) {
+      el.classList.add('display-none');
+    }
+  }))
+  .catch((err) => {
+    console.log('Fetch Error :-S', err);
+  });
+
+// dataHomes.forEach((item) => {
+//   const el = document.createElement('div');
+//   el.classList.add('col-3');
+//   el.innerHTML = `
+//    <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
+//    <a class="homes__link" href="">${item.name}</a>
+//    <p class="homes__text">${item.city}, ${item.country}</p>
+//    `;
+//   homesElements.appendChild(el);
+// });
