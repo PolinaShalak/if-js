@@ -196,142 +196,127 @@ const search = (str) => {
 console.log(search('Ber'));
 
 // календарь
-// const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
-//   'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-//
-// const currentDay = new Date().getDate();
-//
-// let yearNumber = new Date().getFullYear();
-// const yearNow = new Date().getFullYear();
-//
-// const monthNow = new Date().getMonth();
-// let monthNumber = new Date().getMonth();
-//
-// const getCalendarMonth = (checkInDate, checkOutDate, monthNumber, elementID, yearNumber) => {
-//   if (monthNumber >= 12) {
-//     monthNumber = 0;
-//     yearNumber++;
-//   }
-//
-//   if (monthNumber < 0) {
-//     monthNumber = 11;
-//     yearNumber--;
-//   }
-//
-//   const daysInWeek = 7;
-//   const daysInMonth = new Date(yearNumber, monthNumber + 1, 0).getDate();
-//   let dayOfWeek = new Date(yearNumber, monthNumber, 1).getDay();
-//   dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
-//
-//   const nameOfMonth = document.getElementById(elementID);
-//   nameOfMonth.textContent = `${arrayMonthName[monthNumber]} ${yearNumber}`;
-//
-//   if (dayOfWeek >= daysInWeek) {
-//     throw new Error('Invalid data');
-//   }
-//
-//   const calendarArray = [];
-//   let weekArray = [];
-//   if (dayOfWeek > 0) {
-//     for (let i = daysInMonth - dayOfWeek + 2; i <= daysInMonth; i++) {
-//       weekArray.push({
-//         dayOfMonth: i,
-//         notCurrentMonth: true,
-//       });
-//     }
-//   }
-//   for (let i = 1; i <= daysInMonth; i++) {
-//     weekArray.push({
-//       dayOfMonth: i,
-//       selectedDay: (i >= checkInDate && i <= checkOutDate),
-//       currentDay: (i === currentDay),
-//       currentMonth: monthNumber,
-//       numberYear: yearNumber,
-//     });
-//     if (weekArray.length === daysInWeek) {
-//       calendarArray.push(weekArray);
-//       weekArray = [];
-//     }
-//   }
-//   if (weekArray.length === 0) {
-//     return calendarArray;
-//   }
-//   for (let i = 1; weekArray.length !== daysInWeek; i++) {
-//     weekArray.push({
-//       dayOfMonth: i,
-//       notCurrentMonth: true,
-//     });
-//   }
-//   calendarArray.push(weekArray);
-//   return calendarArray;
-// };
-//
-//
-// //monthNumber+=2;
-// // console.log(monthNumber);
-// // currentYear +=1
-//
-// const currentMonthCalendar = function () {
-//    return getCalendarMonth(5, 10,
-//       monthNumber, 'month', yearNumber);
-// }
-//
-// const nextMonthCalendar =  function () {
-//   return getCalendarMonth(5, 10,
-//       monthNumber + 1, 'month-next', yearNumber);
-// }
-//
-// function createCalendarInHTML(item, calendarElements) {
-//   const el = document.getElementById(calendarElements);
-//   item.forEach((weeks) => {
-//     const week = document.createElement('div');
-//     week.classList.add('calendar__day-of-week');
-//     weeks.forEach((days) => {
-//       const day = document.createElement('div');
-//       if (days.notCurrentMonth) {
-//         day.classList.add('cell');
-//         week.appendChild(day);
-//         return;
-//       }
-//       day.classList.add('cell-days');
-//       if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
-//         day.textContent = `${days.dayOfMonth}`;
-//         day.classList.add('calendar__current-day');
-//         week.appendChild(day);
-//       } else {
-//         day.textContent = `${days.dayOfMonth}`;
-//         week.appendChild(day);
-//       }
-//     });
-//     el.appendChild(week);
-//   });
-// }
-//
-// createCalendarInHTML(currentMonthCalendar(), 'calendar');
-// createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
-//
-//
-//
-// const deleteCalendar = () => {
-//   const calendarEl = document.getElementById('calendar');
-//   const calendarNextEl = document.getElementById('calendar-next');
-//   document.body.removeChild(calendarEl);
-//   document.body.removeChild(calendarNextEl);
-// }
-//
-//
-// const calendarArrowNext = document.getElementById('calendar__arrow-next');
-// console.log(calendarArrowNext);
-//
-// function addClick() {
-//   monthNumber++;
-//   console.log(monthNumber);
-//   deleteCalendar();
-//   createCalendarInHTML(currentMonthCalendar(), 'calendar');
-//   createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
-// }
-//
-// calendarArrowNext.addEventListener("click", addClick);
+const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
+  'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const currentDay = new Date().getDate();
+
+const yearNumber = new Date().getFullYear();
+const yearNow = new Date().getFullYear();
+
+const monthNow = new Date().getMonth();
+let monthNumber = new Date().getMonth();
+
+const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, yearCount) => {
+  const daysInWeek = 7;
+  const date = new Date(yearNumber, monthCount + 1, 0);
+  const daysInMonth = date.getDate();
+  let dayOfWeek = new Date(yearCount, monthCount, 1).getDay();
+  dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+
+  const nameOfMonth = document.getElementById(elementID);
+  nameOfMonth.textContent = `${arrayMonthName[date.getMonth()]} ${date.getFullYear()}`;
+
+  const calendarArray = [];
+  let weekArray = [];
+  if (dayOfWeek > 0) {
+    for (let i = daysInMonth - dayOfWeek + 2; i <= daysInMonth; i++) {
+      weekArray.push({
+        dayOfMonth: i,
+        notCurrentMonth: true,
+      });
+    }
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    weekArray.push({
+      dayOfMonth: i,
+      selectedDay: (i >= checkInDate && i <= checkOutDate),
+      currentDay: (i === currentDay),
+      currentMonth: monthCount,
+      numberYear: yearCount,
+    });
+    if (weekArray.length === daysInWeek) {
+      calendarArray.push(weekArray);
+      weekArray = [];
+    }
+  }
+  if (weekArray.length === 0) {
+    return calendarArray;
+  }
+  for (let i = 1; weekArray.length !== daysInWeek; i++) {
+    weekArray.push({
+      dayOfMonth: i,
+      notCurrentMonth: true,
+    });
+  }
+  calendarArray.push(weekArray);
+  return calendarArray;
+};
+
+const currentMonthCalendar = function () {
+  return getCalendarMonth(5, 10,
+    monthNumber, 'month', yearNumber);
+};
+
+const nextMonthCalendar = function () {
+  return getCalendarMonth(5, 10,
+    monthNumber + 1, 'month-next', yearNumber);
+};
+
+function createCalendarInHTML(item, calendarElements) {
+  const el = document.getElementById(calendarElements);
+  item.forEach((weeks) => {
+    const week = document.createElement('div');
+    week.classList.add('calendar__day-of-week');
+    weeks.forEach((days) => {
+      const day = document.createElement('div');
+      if (days.notCurrentMonth) {
+        day.classList.add('cell');
+        week.appendChild(day);
+        return;
+      }
+      day.classList.add('cell-days');
+      if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
+        day.textContent = `${days.dayOfMonth}`;
+        day.classList.add('calendar__current-day');
+        week.appendChild(day);
+      } else {
+        day.textContent = `${days.dayOfMonth}`;
+        week.appendChild(day);
+      }
+    });
+    el.appendChild(week);
+  });
+}
+
+createCalendarInHTML(currentMonthCalendar(), 'calendar');
+createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+
+const deleteCalendar = () => {
+  const calendarEl = document.getElementById('calendar');
+  const calendarNextEl = document.getElementById('calendar-next');
+  calendarEl.innerHTML = '';
+  calendarNextEl.innerHTML = '';
+};
+
+const calendarArrowBack = document.getElementById('calendar__arrow-back');
+const calendarArrowNext = document.getElementById('calendar__arrow-next');
+
+function addClick(event) {
+  if (event.currentTarget === calendarArrowNext) {
+    monthNumber++;
+  }
+  if (event.currentTarget === calendarArrowBack) {
+    monthNumber--;
+  }
+  console.log(monthNumber);
+  deleteCalendar();
+  createCalendarInHTML(currentMonthCalendar(), 'calendar');
+  createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+}
+
+calendarArrowNext.addEventListener('click', addClick);
+calendarArrowBack.addEventListener('click', addClick);
 
 // LESSON 8
 const studentsData = [
