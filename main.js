@@ -129,9 +129,9 @@ console.log(sum3(4)(10)); // 14
 // text3El.addEventListener('click', count());
 
 // преобразование формата даты из '2020-11-26' в '26.11.2020'
-const date = '2020-11-26';
+const dateChang = '2020-11-26';
 const dateReverse = (date1) => date1.split('-').reverse().join('.');
-console.log(dateReverse(date));
+console.log(dateReverse(dateChang));
 
 // поиск объектов размещения
 const data = [
@@ -435,9 +435,16 @@ text3El.addEventListener('click', count());
 
 const homesElements = document.getElementById('homes-cards');
 
-fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
-  .then((response) => response.json())
-  .then((dataHomes) => dataHomes.forEach((item, index) => {
+let dataHomes;
+
+(async () => {
+  dataHomes = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+    .then((response) => response.json())
+    .then((data1) => data1)
+    .catch((err) => {
+      console.log('Fetch Error :-S', err);
+    });
+  dataHomes.forEach((item, index) => {
     const el = document.createElement('div');
     el.classList.add('col-3');
     el.innerHTML = `
@@ -449,18 +456,5 @@ fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
     if (index > 3) {
       el.classList.add('display-none');
     }
-  }))
-  .catch((err) => {
-    console.log('Fetch Error :-S', err);
   });
-
-// dataHomes.forEach((item) => {
-//   const el = document.createElement('div');
-//   el.classList.add('col-3');
-//   el.innerHTML = `
-//    <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
-//    <a class="homes__link" href="">${item.name}</a>
-//    <p class="homes__text">${item.city}, ${item.country}</p>
-//    `;
-//   homesElements.appendChild(el);
-// });
+})();
