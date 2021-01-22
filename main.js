@@ -196,6 +196,17 @@ const search = (str) => {
 console.log(search('Ber'));
 
 // календарь
+
+// const calendar = document.getElementById('header__calendar');
+// const formsWithDate = document.getElementById('form__check');
+// formsWithDate.addEventListener('click', (event) => {
+//   event.stopPropagation();
+//   if (event.target === formsWithDate){
+//     calendar.classList.toggle('display-none')
+//   }
+//   console.log(event.target);
+// });
+
 const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
   'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -392,34 +403,34 @@ class Students {
 const students = new Students(studentsData);
 console.log(students.getInfo());
 
-// абзацы меняют цвета из массива по клику
-const text1El = document.getElementById('text1');
-const text2El = document.getElementById('text2');
-const text3El = document.getElementById('text3');
-const colors = {
-  color: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
-  [Symbol.iterator]() {
-    return this;
-  },
-  next(count) {
-    return {
-      value: this.color[count],
-      done: false,
-    };
-  },
-};
+// // абзацы меняют цвета из массива по клику
+// const text1El = document.getElementById('text1');
+// const text2El = document.getElementById('text2');
+// const text3El = document.getElementById('text3');
+// const colors = {
+//   color: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+//   [Symbol.iterator]() {
+//     return this;
+//   },
+//   next(count) {
+//     return {
+//       value: this.color[count],
+//       done: false,
+//     };
+//   },
+// };
 
-const count = () => {
-  let callNumber = 0;
-  return (event) => {
-    event.target.style.color = colors.next(callNumber).value;
-    callNumber = callNumber > 3 ? 0 : callNumber + 1;
-  };
-};
-
-text1El.addEventListener('click', count());
-text2El.addEventListener('click', count());
-text3El.addEventListener('click', count());
+// const count = () => {
+//   let callNumber = 0;
+//   return (event) => {
+//     event.target.style.color = colors.next(callNumber).value;
+//     callNumber = callNumber > 3 ? 0 : callNumber + 1;
+//   };
+// };
+//
+// text1El.addEventListener('click', count());
+// text2El.addEventListener('click', count());
+// text3El.addEventListener('click', count());
 
 const homesElements = document.getElementById('homes-cards');
 

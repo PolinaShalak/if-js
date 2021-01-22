@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
-<p id="text1">Text 1</p>
-<p id="text2">Text 2</p>
-<p id="text3">Text 3</p>
+<!--<p id="text1">Text 1</p>-->
+<!--<p id="text2">Text 2</p>-->
+<!--<p id="text3">Text 3</p>-->
 <svg class="sprites" xmlns="http://www.w3.org/2000/svg">
     <symbol id="night" viewBox="0 0 30 30">
         <path d="M25.61 10.61V4.39h-6.22L15 0l-4.39 4.39H4.39v6.22L0 15l4.39 4.39v6.22h6.22L15 30l4.39-4.39h6.22v-6.22L30 15l-4.39-4.39zM15 22.958a7.924 7.924 0 01-3.316-.73c2.732-1.26 4.642-4.018 4.642-7.228s-1.91-5.968-4.642-7.228A7.924 7.924 0 0115 7.042c4.39 0 7.958 3.568 7.958 7.958 0 4.39-3.568 7.958-7.958 7.958z" />
@@ -96,7 +96,7 @@
                 <input id="city" class="form__input--your-destination" type="text" placeholder="New York">
                 <label for="city" class="form__label--your-destination form__labels_all">Your destination or hotel name</label>
             </div>
-            <div class="form__check">
+            <div class="form__check" id="form__check">
                 <div class="form__check-in">
                     <input id="check-in" class="form__input--check-in form__input_all" type="text" placeholder="Tue 15 Sept">
                     <label for="check-in" class="form__label--check-in form__labels_all">Check-in</label>
@@ -105,7 +105,7 @@
                     <input id="check-out" class="form__input--check-out form__input_all" type="text" placeholder="Sat 19 Sept">
                     <label for="check-out" class="form__label--check-out form__labels_all">Check-out</label>
                 </div>
-                <div class="header__calendar">
+                <div class="header__calendar" id="header__calendar">
                     <div class="calendar__month">
                         <svg class="calendar__arrow-back" id="calendar__arrow-back">
                             <use href="#arrow-calendar"></use>
