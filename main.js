@@ -207,6 +207,7 @@ const yearNow = new Date().getFullYear();
 const monthNow = new Date().getMonth();
 let monthNumber = new Date().getMonth();
 
+// возвращает массив с датами
 const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, yearCount) => {
   const daysInWeek = 7;
   const date = new Date(yearNumber, monthCount + 1, 0);
@@ -253,6 +254,7 @@ const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, year
   return calendarArray;
 };
 
+// в переменную добавляется массив с датами
 const currentMonthCalendar = function () {
   return getCalendarMonth(5, 10,
     monthNumber, 'month', yearNumber);
@@ -263,6 +265,7 @@ const nextMonthCalendar = function () {
     monthNumber + 1, 'month-next', yearNumber);
 };
 
+// добавляет html и css в блок с календарем
 function createCalendarInHTML(item, calendarElements) {
   const el = document.getElementById(calendarElements);
   item.forEach((weeks) => {
