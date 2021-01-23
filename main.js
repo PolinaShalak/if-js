@@ -330,6 +330,13 @@ function addClick(event) {
 calendarArrowNext.addEventListener('click', addClick);
 calendarArrowBack.addEventListener('click', addClick);
 
+
+// calendarElement.addEventListener('click', (event) => {
+//   if (event.currentTarget === calendarElement) {
+//     console.log(event);
+//   }
+// });
+
 // LESSON 8
 const studentsData = [
   {
