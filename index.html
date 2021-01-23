@@ -105,46 +105,6 @@
                     <input id="check-out" class="form__input--check-out form__input_all" type="text" placeholder="Sat 19 Sept">
                     <label for="check-out" class="form__label--check-out form__labels_all">Check-out</label>
                 </div>
-                <div class="header__calendar" id="header__calendar">
-                    <div class="calendar__month">
-                        <svg class="calendar__arrow-back" id="calendar__arrow-back">
-                            <use href="#arrow-calendar"></use>
-                        </svg>
-                        <span class="calendar__month-name" id="month">
-                        </span>
-                        <div class="calendar__day-of-week calendar-margin">
-                            <div class="cell">Mo</div>
-                            <div class="cell">Tu</div>
-                            <div class="cell">We</div>
-                            <div class="cell">Th</div>
-                            <div class="cell">Fr</div>
-                            <div class="cell">Sa</div>
-                            <div class="cell">Su</div>
-                        </div>
-                        <div id="calendar">
-
-                        </div>
-                    </div>
-                    <div class="calendar__month">
-                        <svg class="calendar__arrow-next" id="calendar__arrow-next">
-                            <use href="#arrow-calendar"></use>
-                        </svg>
-                             <span class="calendar__month-name" id="month-next">
-                             </span>
-                        <div class="calendar__day-of-week calendar-margin">
-                            <div class="cell">Mo</div>
-                            <div class="cell">Tu</div>
-                            <div class="cell">We</div>
-                            <div class="cell">Th</div>
-                            <div class="cell">Fr</div>
-                            <div class="cell">Sa</div>
-                            <div class="cell">Su</div>
-                        </div>
-                        <div id="calendar-next">
-
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="form__people">
                 <div class="forms__adults ">
@@ -162,6 +122,46 @@
             </div>
             <div class="form__button">
                 <button class="form__button__text" type="submit">Search</button>
+            </div>
+            <div class="header__calendar display-none" id="header__calendar">
+                <div class="calendar__month">
+                    <svg class="calendar__arrow-back" id="calendar__arrow-back">
+                        <use href="#arrow-calendar"></use>
+                    </svg>
+                    <span class="calendar__month-name" id="month">
+                        </span>
+                    <div class="calendar__day-of-week calendar-margin">
+                        <div class="cell">Mo</div>
+                        <div class="cell">Tu</div>
+                        <div class="cell">We</div>
+                        <div class="cell">Th</div>
+                        <div class="cell">Fr</div>
+                        <div class="cell">Sa</div>
+                        <div class="cell">Su</div>
+                    </div>
+                    <div id="calendar">
+
+                    </div>
+                </div>
+                <div class="calendar__month">
+                    <svg class="calendar__arrow-next" id="calendar__arrow-next">
+                        <use href="#arrow-calendar"></use>
+                    </svg>
+                    <span class="calendar__month-name" id="month-next">
+                             </span>
+                    <div class="calendar__day-of-week calendar-margin">
+                        <div class="cell">Mo</div>
+                        <div class="cell">Tu</div>
+                        <div class="cell">We</div>
+                        <div class="cell">Th</div>
+                        <div class="cell">Fr</div>
+                        <div class="cell">Sa</div>
+                        <div class="cell">Su</div>
+                    </div>
+                    <div id="calendar-next">
+
+                    </div>
+                </div>
             </div>
         </div>
         <div class="header__apps">
@@ -183,7 +183,10 @@
     <div class="container">
         <h2 class="title">Homes guests loves</h2>
         <div class="row" id="homes-cards">
-            <svg class="homes__svg_arrow">
+            <svg class="homes__svg_arrow-back display-none">
+                <use href="#arrow"></use>
+            </svg>
+            <svg class="homes__svg_arrow-next">
                 <use href="#arrow"></use>
             </svg>
         </div>

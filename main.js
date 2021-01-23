@@ -196,16 +196,14 @@ const search = (str) => {
 console.log(search('Ber'));
 
 // календарь
-
-// const calendar = document.getElementById('header__calendar');
-// const formsWithDate = document.getElementById('form__check');
-// formsWithDate.addEventListener('click', (event) => {
-//   event.stopPropagation();
-//   if (event.target === formsWithDate){
-//     calendar.classList.toggle('display-none')
-//   }
-//   console.log(event.target);
-// });
+// каленарь добавляется и удаляется при клике
+const calendarElement = document.getElementById('header__calendar');
+const formsWithDateElement = document.getElementById('form__check');
+formsWithDateElement.addEventListener('click', (event) => {
+  if (event.currentTarget === formsWithDateElement) {
+    calendarElement.classList.toggle('display-none');
+  }
+});
 
 const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
   'June', 'July', 'August', 'September', 'October', 'November', 'December'];
