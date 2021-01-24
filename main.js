@@ -210,6 +210,8 @@ const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
 
 const currentDay = new Date().getDate();
 
+const dayNow = new Date().getDate();
+
 const yearNumber = new Date().getFullYear();
 const yearNow = new Date().getFullYear();
 
@@ -287,7 +289,14 @@ function createCalendarInHTML(item, calendarElements) {
         week.appendChild(day);
         return;
       }
+
       day.classList.add('cell-days');
+      if (days.numberYear < yearNow
+          || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
+        day.textContent = `${days.dayOfMonth}`;
+        day.classList.add('calendar__grey-days');
+        week.appendChild(day);
+      }
       if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
         day.textContent = `${days.dayOfMonth}`;
         day.classList.add('calendar__current-day');
@@ -319,6 +328,7 @@ function addClick(event) {
     monthNumber++;
   }
   if (event.currentTarget === calendarArrowBack) {
+    if (monthNumber === 0) return;
     monthNumber--;
   }
   console.log(monthNumber);
@@ -330,12 +340,22 @@ function addClick(event) {
 calendarArrowNext.addEventListener('click', addClick);
 calendarArrowBack.addEventListener('click', addClick);
 
+const calendarForClickFirstEl = document.getElementById('calendar');
+const calendarForClickSecondEl = document.getElementById('calendar-next');
 
-// calendarElement.addEventListener('click', (event) => {
-//   if (event.currentTarget === calendarElement) {
-//     console.log(event);
-//   }
-// });
+calendarForClickFirstEl.addEventListener('click', (event) => {
+  if (event.target.classList.contains('cell')) return;
+  const numberOfMonth = document.getElementById('month');
+  console.log(numberOfMonth.textContent);
+  console.log(event.target.textContent);
+});
+
+calendarForClickSecondEl.addEventListener('click', (event) => {
+  if (event.target.classList.contains('cell')) return;
+  const numberOfMonth = document.getElementById('month-next');
+  console.log(numberOfMonth.textContent);
+  console.log(event.target.textContent);
+});
 
 // LESSON 8
 const studentsData = [

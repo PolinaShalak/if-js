@@ -370,6 +370,7 @@ input::placeholder {
     width: 8px;
     height: 18px;
     position: absolute;
+    top: 15px;
 }
 
 .calendar__arrow-next {
@@ -417,8 +418,16 @@ input::placeholder {
     background-color: var(--secondary-text);
 }
 
+.calendar__grey-days:hover {
+    background-color: var(--white);
+}
+
 .calendar__current-day {
     color: var(--primary);
+}
+
+.calendar__grey-days {
+    color: var(--secondary-text);
 }
 
 /* Offers */
