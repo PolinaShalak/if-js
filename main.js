@@ -289,7 +289,6 @@ function createCalendarInHTML(item, calendarElements) {
         week.appendChild(day);
         return;
       }
-
       day.classList.add('cell-days');
       if (days.numberYear < yearNow
           || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
@@ -340,21 +339,38 @@ function addClick(event) {
 calendarArrowNext.addEventListener('click', addClick);
 calendarArrowBack.addEventListener('click', addClick);
 
+let selectedDateCheckIN;
+let selectedDateCheckOut;
+
 const calendarForClickFirstEl = document.getElementById('calendar');
 const calendarForClickSecondEl = document.getElementById('calendar-next');
 
-calendarForClickFirstEl.addEventListener('click', (event) => {
+const selectedDate = (event, selector) => {
   if (event.target.classList.contains('cell')) return;
-  const numberOfMonth = document.getElementById('month');
-  console.log(numberOfMonth.textContent);
-  console.log(event.target.textContent);
+  const numberOfMonth = document.getElementById(selector);
+  const [month, year] = numberOfMonth.textContent.split(' ');
+  const day = event.target.textContent;
+  const dateCheck = new Date(`  ${month}, ${day}, ${year} `);
+  if (selectedDateCheckIN === undefined) {
+    selectedDateCheckIN = dateCheck;
+  } else if (selectedDateCheckIN.getTime() >= dateCheck.getTime()) {
+    selectedDateCheckIN = dateCheck;
+    selectedDateCheckOut = undefined;
+  } else if (selectedDateCheckOut === undefined) {
+    selectedDateCheckOut = dateCheck;
+  } else {
+    selectedDateCheckOut = undefined;
+    selectedDateCheckIN = dateCheck;
+  }
+  console.log(selectedDateCheckIN, selectedDateCheckOut);
+};
+
+calendarForClickFirstEl.addEventListener('click', (event) => {
+  selectedDate(event, 'month');
 });
 
 calendarForClickSecondEl.addEventListener('click', (event) => {
-  if (event.target.classList.contains('cell')) return;
-  const numberOfMonth = document.getElementById('month-next');
-  console.log(numberOfMonth.textContent);
-  console.log(event.target.textContent);
+  selectedDate(event, 'month-next');
 });
 
 // LESSON 8
