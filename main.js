@@ -479,25 +479,29 @@ const screenBrowserWidth = window.screen.availWidth;
 
 (async () => {
   const dataHomes = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
-    .then((response) => response.json())
-    .then((data1) => data1)
-    .catch((err) => {
-      console.log('Fetch Error :-S', err);
-    });
-  dataHomes.forEach((item, index) => {
-    const el = document.createElement('div');
-    el.classList.add('col-3', 'col-xs-3', 'col-sm-2');
-    el.innerHTML = `
+      .then((response) => response.json())
+      .then((data1) => data1)
+      .catch((err) => {
+        console.log('Fetch Error :-S', err);
+      });
+  if (!dataHomes) {
+    console.log('Array dataHomes not found')
+  } else {
+    dataHomes.forEach((item, index) => {
+      const el = document.createElement('div');
+      el.classList.add('col-3', 'col-xs-3', 'col-sm-2');
+      el.innerHTML = `
    <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
    <a class="homes__link" href="">${item.name}</a>
    <p class="homes__text">${item.city}, ${item.country}</p>
    `;
-    homesElements.appendChild(el);
-    if (index > 3) {
-      el.classList.add('display-none');
-    }
-    if (index > 1 && screenBrowserWidth < 768) {
-      el.classList.add('display-none');
-    }
-  });
+      homesElements.appendChild(el);
+      if (index > 3) {
+        el.classList.add('display-none');
+      }
+      if (index > 1 && screenBrowserWidth < 768) {
+        el.classList.add('display-none');
+      }
+    });
+  }
 })();
