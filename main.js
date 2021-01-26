@@ -129,9 +129,9 @@ console.log(sum3(4)(10)); // 14
 // text3El.addEventListener('click', count());
 
 // преобразование формата даты из '2020-11-26' в '26.11.2020'
-const date = '2020-11-26';
+const dateChang = '2020-11-26';
 const dateReverse = (date1) => date1.split('-').reverse().join('.');
-console.log(dateReverse(date));
+console.log(dateReverse(dateChang));
 
 // поиск объектов размещения
 const data = [
@@ -195,18 +195,40 @@ const search = (str) => {
 
 console.log(search('Ber'));
 
-const currentMonth = new Date().getMonth();
-const currentYear = new Date().getFullYear();
-const currentDay = new Date().getDate();
-let dayOfWeeks = new Date(currentYear, currentMonth, 1).getDay();
-dayOfWeeks = dayOfWeeks === 0 ? 7 : dayOfWeeks;
-const allDaysInMoth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
 // календарь
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, checkOutDate) => {
-  if (dayOfWeek >= daysInWeek) {
-    throw new Error('Invalid data');
+// каленарь добавляется и удаляется при клике
+const calendarElement = document.getElementById('header__calendar');
+const formsWithDateElement = document.getElementById('form__check');
+formsWithDateElement.addEventListener('click', (event) => {
+  if (event.currentTarget === formsWithDateElement) {
+    calendarElement.classList.toggle('display-none');
   }
+});
+
+const arrayMonthName = ['January', 'February', 'March', 'April', 'May',
+  'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const currentDay = new Date().getDate();
+
+const dayNow = new Date().getDate();
+
+const yearNumber = new Date().getFullYear();
+const yearNow = new Date().getFullYear();
+
+const monthNow = new Date().getMonth();
+let monthNumber = new Date().getMonth();
+
+// возвращает массив с датами
+const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, yearCount) => {
+  const daysInWeek = 7;
+  const date = new Date(yearNumber, monthCount + 1, 0);
+  const daysInMonth = date.getDate();
+  let dayOfWeek = new Date(yearCount, monthCount, 1).getDay();
+  dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+
+  const nameOfMonth = document.getElementById(elementID);
+  nameOfMonth.textContent = `${arrayMonthName[date.getMonth()]} ${date.getFullYear()}`;
+
   const calendarArray = [];
   let weekArray = [];
   if (dayOfWeek > 0) {
@@ -222,6 +244,8 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
       dayOfMonth: i,
       selectedDay: (i >= checkInDate && i <= checkOutDate),
       currentDay: (i === currentDay),
+      currentMonth: monthCount,
+      numberYear: yearCount,
     });
     if (weekArray.length === daysInWeek) {
       calendarArray.push(weekArray);
@@ -237,10 +261,117 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek, checkInDate, check
       notCurrentMonth: true,
     });
   }
+  calendarArray.push(weekArray);
   return calendarArray;
 };
 
-console.log(getCalendarMonth(allDaysInMoth, 7, dayOfWeeks, 5, 10));
+// в переменную добавляется массив с датами
+const currentMonthCalendar = function () {
+  return getCalendarMonth(5, 10,
+    monthNumber, 'month', yearNumber);
+};
+
+const nextMonthCalendar = function () {
+  return getCalendarMonth(5, 10,
+    monthNumber + 1, 'month-next', yearNumber);
+};
+
+// добавляет html и css в блок с календарем
+function createCalendarInHTML(item, calendarElements) {
+  const el = document.getElementById(calendarElements);
+  item.forEach((weeks) => {
+    const week = document.createElement('div');
+    week.classList.add('calendar__day-of-week');
+    weeks.forEach((days) => {
+      const day = document.createElement('div');
+      if (days.notCurrentMonth) {
+        day.classList.add('cell');
+        week.appendChild(day);
+        return;
+      }
+      day.classList.add('cell-days');
+      if (days.numberYear < yearNow
+          || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
+        day.textContent = `${days.dayOfMonth}`;
+        day.classList.add('calendar__grey-days');
+        week.appendChild(day);
+      }
+      if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
+        day.textContent = `${days.dayOfMonth}`;
+        day.classList.add('calendar__current-day');
+        week.appendChild(day);
+      } else {
+        day.textContent = `${days.dayOfMonth}`;
+        week.appendChild(day);
+      }
+    });
+    el.appendChild(week);
+  });
+}
+
+createCalendarInHTML(currentMonthCalendar(), 'calendar');
+createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+
+const deleteCalendar = () => {
+  const calendarEl = document.getElementById('calendar');
+  const calendarNextEl = document.getElementById('calendar-next');
+  calendarEl.innerHTML = '';
+  calendarNextEl.innerHTML = '';
+};
+
+const calendarArrowBack = document.getElementById('calendar__arrow-back');
+const calendarArrowNext = document.getElementById('calendar__arrow-next');
+
+function addClick(event) {
+  if (event.currentTarget === calendarArrowNext) {
+    monthNumber++;
+  }
+  if (event.currentTarget === calendarArrowBack) {
+    if (monthNumber === 0) return;
+    monthNumber--;
+  }
+  console.log(monthNumber);
+  deleteCalendar();
+  createCalendarInHTML(currentMonthCalendar(), 'calendar');
+  createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+}
+
+calendarArrowNext.addEventListener('click', addClick);
+calendarArrowBack.addEventListener('click', addClick);
+
+let selectedDateCheckIN;
+let selectedDateCheckOut;
+
+const calendarForClickFirstEl = document.getElementById('calendar');
+const calendarForClickSecondEl = document.getElementById('calendar-next');
+
+const selectedDate = (event, selector) => {
+  if (event.target.classList.contains('cell')) return;
+  const numberOfMonth = document.getElementById(selector);
+  const [month, year] = numberOfMonth.textContent.split(' ');
+  const day = event.target.textContent;
+  const dateCheck = new Date(`  ${month}, ${day}, ${year} `);
+  if (selectedDateCheckIN === undefined) {
+    selectedDateCheckIN = dateCheck;
+  } else if (selectedDateCheckIN.getTime() >= dateCheck.getTime()) {
+    selectedDateCheckIN = dateCheck;
+    selectedDateCheckOut = undefined;
+  } else if (selectedDateCheckOut === undefined) {
+    selectedDateCheckOut = dateCheck;
+  } else {
+    selectedDateCheckOut = undefined;
+    selectedDateCheckIN = dateCheck;
+  }
+  console.log(selectedDateCheckIN, selectedDateCheckOut);
+};
+
+calendarForClickFirstEl.addEventListener('click', (event) => {
+  selectedDate(event, 'month');
+});
+
+calendarForClickSecondEl.addEventListener('click', (event) => {
+  selectedDate(event, 'month-next');
+});
 
 // LESSON 8
 const studentsData = [
@@ -313,71 +444,64 @@ class Students {
 const students = new Students(studentsData);
 console.log(students.getInfo());
 
-// абзацы меняют цвета из массива по клику
-const text1El = document.getElementById('text1');
-const text2El = document.getElementById('text2');
-const text3El = document.getElementById('text3');
-const colors = {
-  color: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
-  [Symbol.iterator]() {
-    return this;
-  },
-  next(count) {
-    return {
-      value: this.color[count],
-      done: false,
-    };
-  },
-};
+// // абзацы меняют цвета из массива по клику
+// const text1El = document.getElementById('text1');
+// const text2El = document.getElementById('text2');
+// const text3El = document.getElementById('text3');
+// const colors = {
+//   color: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+//   [Symbol.iterator]() {
+//     return this;
+//   },
+//   next(count) {
+//     return {
+//       value: this.color[count],
+//       done: false,
+//     };
+//   },
+// };
 
-const count = () => {
-  let callNumber = 0;
-  return (event) => {
-    event.target.style.color = colors.next(callNumber).value;
-    callNumber = callNumber > 3 ? 0 : callNumber + 1;
-  };
-};
-
-text1El.addEventListener('click', count());
-text2El.addEventListener('click', count());
-text3El.addEventListener('click', count());
-
-const dataHomes = [
-  {
-    name: 'Hotel Leopold',
-    city: 'Saint Petersburg',
-    country: 'Russia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
-  },
-  {
-    name: 'Apartment Sunshine',
-    city: 'Santa  Cruz de Tenerife',
-    country: 'Spain',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
-  },
-  {
-    name: 'Villa Kunerad',
-    city: 'Vysokie Tatry',
-    country: 'Slowakia',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
-  },
-  {
-    name: 'Hostel Friendship',
-    city: 'Berlin',
-    country: 'Germany',
-    imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
-  },
-];
+// const count = () => {
+//   let callNumber = 0;
+//   return (event) => {
+//     event.target.style.color = colors.next(callNumber).value;
+//     callNumber = callNumber > 3 ? 0 : callNumber + 1;
+//   };
+// };
+//
+// text1El.addEventListener('click', count());
+// text2El.addEventListener('click', count());
+// text3El.addEventListener('click', count());
 
 const homesElements = document.getElementById('homes-cards');
 
-dataHomes.forEach((item) => {
-  const el = document.createElement('div');
-  el.classList.add('col-3');
-  el.innerHTML = `
-   <img class="homes__images" src="${item.imageUrl}" alt="${item.name}">
+const screenBrowserWidth = window.screen.availWidth;
+
+(async () => {
+  const dataHomes = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+      .then((response) => response.json())
+      .then((data1) => data1)
+      .catch((err) => {
+        console.log('Fetch Error :-S', err);
+      });
+  if (!dataHomes) {
+    console.log('Array dataHomes not found')
+  } else {
+    dataHomes.forEach((item, index) => {
+      const el = document.createElement('div');
+      el.classList.add('col-3', 'col-xs-3', 'col-sm-2');
+      el.innerHTML = `
+   <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
    <a class="homes__link" href="">${item.name}</a>
    <p class="homes__text">${item.city}, ${item.country}</p>
    `;
-  homesElements.appendChild(el);
-});
+      homesElements.appendChild(el);
+      if (index > 3) {
+        el.classList.add('display-none');
+      }
+      if (index > 1 && screenBrowserWidth < 768) {
+        el.classList.add('display-none');
+      }
+    });
+  }
+})();
