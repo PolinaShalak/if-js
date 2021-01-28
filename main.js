@@ -478,14 +478,20 @@ const homesElements = document.getElementById('homes-cards');
 const screenBrowserWidth = window.screen.availWidth;
 
 (async () => {
-  const dataHomes = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+  let dataHomes;
+  if (!sessionStorage.getItem('homes')) {
+    dataHomes = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
       .then((response) => response.json())
       .then((data1) => data1)
       .catch((err) => {
         console.log('Fetch Error :-S', err);
       });
+    sessionStorage.setItem('homes', JSON.stringify(dataHomes));
+  } else {
+    dataHomes = JSON.parse(sessionStorage.getItem('homes'));
+  }
   if (!dataHomes) {
-    console.log('Array dataHomes not found')
+    console.log('Array dataHomes not found');
   } else {
     dataHomes.forEach((item, index) => {
       const el = document.createElement('div');
