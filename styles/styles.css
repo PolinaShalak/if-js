@@ -1050,6 +1050,38 @@ li {
         width: 100%;
     }
 
+    .header__calendar {
+        top: 50%;
+        right: 23%;
+    }
+
+    [class*='calendar__arrow'] {
+        width: 6px;
+        height: 15px;
+        top: 13px;
+    }
+
+    .calendar__month-year,
+    .calendar__month-name {
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .calendar__month {
+        width: 230px;
+        padding: 10px 20px 16px;
+    }
+
+    .calendar-margin {
+        margin-top: 8px;
+    }
+
+    [class*="cell"] {
+        width: 27px;
+        height: 27px;
+        font-size: 12px;
+    }
+
     .header__apps {
         margin-top: 32px;
     }
@@ -1232,6 +1264,38 @@ li {
 
     .nav__svg--menu {
         display: flex
+    }
+
+
+    .header__calendar {
+        right: 20%;
+    }
+
+    [class*='calendar__arrow'] {
+        width: 6px;
+        height: 15px;
+        top: 13px;
+    }
+
+    .calendar__month-year,
+    .calendar__month-name {
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    .calendar__month {
+        width: 175px;
+        padding: 8px 16px 13px;
+    }
+
+    .calendar-margin {
+        margin-top: 5px;
+    }
+
+    [class*="cell"] {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
     }
 
     .h1 {
@@ -1442,6 +1506,21 @@ li {
     .container {
         max-width: 360px;
         padding: 40px 16px;
+    }
+
+    .header__calendar {
+        right: 0;
+    }
+
+    .calendar__month-year,
+    .calendar__month-name {
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .calendar__month {
+        width: 163px;
+        padding: 6px 10px 9px;
     }
 
     .offers .container {
