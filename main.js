@@ -351,6 +351,9 @@ const selectedDate = (event, selector) => {
   const [month, year] = numberOfMonth.textContent.split(' ');
   const day = event.target.textContent;
   const dateCheck = new Date(`  ${month}, ${day}, ${year} `);
+  const inputCheckInEl = document.getElementById('check-in');
+  const inputCheckOutEl = document.getElementById('check-out');
+
   if (selectedDateCheckIN === undefined) {
     selectedDateCheckIN = dateCheck;
   } else if (selectedDateCheckIN.getTime() >= dateCheck.getTime()) {
@@ -363,6 +366,8 @@ const selectedDate = (event, selector) => {
     selectedDateCheckIN = dateCheck;
   }
   console.log(selectedDateCheckIN, selectedDateCheckOut);
+  inputCheckInEl.setAttribute('value', `${selectedDateCheckIN.toLocaleDateString('ru')}`);
+  inputCheckOutEl.setAttribute('value', `${selectedDateCheckOut.toLocaleDateString('ru')}`);
 };
 
 calendarForClickFirstEl.addEventListener('click', (event) => {

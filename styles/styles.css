@@ -1273,8 +1273,8 @@ li {
 
     [class*='calendar__arrow'] {
         width: 6px;
-        height: 15px;
-        top: 13px;
+        height: 13px;
+        top: 11px;
     }
 
     .calendar__month-year,
