@@ -430,6 +430,16 @@ input::placeholder {
     color: var(--secondary-text);
 }
 
+.calendar__selected-days {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.calendar__selected-days:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
 /* Offers */
 
 .offers__row {

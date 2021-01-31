@@ -218,6 +218,9 @@ const yearNow = new Date().getFullYear();
 const monthNow = new Date().getMonth();
 let monthNumber = new Date().getMonth();
 
+let selectedDateCheckIN;
+let selectedDateCheckOut;
+
 // возвращает массив с датами
 const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, yearCount) => {
   const daysInWeek = 7;
@@ -279,6 +282,21 @@ const nextMonthCalendar = function () {
 // добавляет html и css в блок с календарем
 function createCalendarInHTML(item, calendarElements) {
   const el = document.getElementById(calendarElements);
+  let selectedDayIn; let selectedMonthIn; let
+    selectedYearIn; // выбранную дату разбиваю на другие переменные
+  let selectedDayOut; let selectedMonthOut; let
+    selectedYearOut;
+  if (selectedDateCheckIN !== undefined) { // если дата не undef, присваиваю переменым значение
+    selectedDayIn = selectedDateCheckIN.getDate();
+    selectedMonthIn = selectedDateCheckIN.getMonth();
+    selectedYearIn = selectedDateCheckIN.getFullYear();
+  }
+  if (selectedDateCheckOut !== undefined) {
+    selectedDayOut = selectedDateCheckOut.getDate();
+    selectedMonthOut = selectedDateCheckOut.getMonth();
+    selectedYearOut = selectedDateCheckOut.getFullYear();
+  }
+
   item.forEach((weeks) => {
     const week = document.createElement('div');
     week.classList.add('calendar__day-of-week');
@@ -289,13 +307,26 @@ function createCalendarInHTML(item, calendarElements) {
         week.appendChild(day);
         return;
       }
+      // добавляю класс выбранным дням
+      if (days.numberYear === selectedYearIn
+          && days.currentMonth === selectedMonthIn
+          && days.dayOfMonth === selectedDayIn) {
+        day.classList.add('calendar__selected-days');
+      }
+      if (days.numberYear === selectedYearOut
+          && days.currentMonth === selectedMonthOut
+          && days.dayOfMonth === selectedDayOut) {
+        day.classList.add('calendar__selected-days');
+      }
       day.classList.add('cell-days');
+      // добавляю класс прошедшим дням
       if (days.numberYear < yearNow
           || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
         day.textContent = `${days.dayOfMonth}`;
         day.classList.add('calendar__grey-days');
         week.appendChild(day);
       }
+      // добавляю класс текущему дню
       if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
         day.textContent = `${days.dayOfMonth}`;
         day.classList.add('calendar__current-day');
@@ -319,9 +350,17 @@ const deleteCalendar = () => {
   calendarNextEl.innerHTML = '';
 };
 
+// удаляет календарь и добавляет новый с изменениями
+function changeCalendar() {
+  deleteCalendar();
+  createCalendarInHTML(currentMonthCalendar(), 'calendar');
+  createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+}
+
 const calendarArrowBack = document.getElementById('calendar__arrow-back');
 const calendarArrowNext = document.getElementById('calendar__arrow-next');
 
+// добавляется событие на стрелки
 function addClick(event) {
   if (event.currentTarget === calendarArrowNext) {
     monthNumber++;
@@ -331,28 +370,35 @@ function addClick(event) {
     monthNumber--;
   }
   console.log(monthNumber);
-  deleteCalendar();
-  createCalendarInHTML(currentMonthCalendar(), 'calendar');
-  createCalendarInHTML(nextMonthCalendar(), 'calendar-next');
+  changeCalendar();
 }
 
 calendarArrowNext.addEventListener('click', addClick);
 calendarArrowBack.addEventListener('click', addClick);
 
-let selectedDateCheckIN;
-let selectedDateCheckOut;
-
 const calendarForClickFirstEl = document.getElementById('calendar');
 const calendarForClickSecondEl = document.getElementById('calendar-next');
 
+const inputCheckInEl = document.getElementById('check-in');
+const inputCheckOutEl = document.getElementById('check-out');
+
+const addValueInInput = () => {
+  inputCheckInEl.value = selectedDateCheckIN.toLocaleDateString('ru');
+  if (selectedDateCheckOut === undefined) {
+    inputCheckOutEl.value = '';
+    return;
+  }
+  inputCheckOutEl.value = selectedDateCheckOut.toLocaleDateString('ru');
+  calendarElement.classList.toggle('display-none');
+};
+
 const selectedDate = (event, selector) => {
   if (event.target.classList.contains('cell')) return;
+  if (event.target.classList.contains('calendar__grey-days')) return;
   const numberOfMonth = document.getElementById(selector);
   const [month, year] = numberOfMonth.textContent.split(' ');
   const day = event.target.textContent;
   const dateCheck = new Date(`  ${month}, ${day}, ${year} `);
-  const inputCheckInEl = document.getElementById('check-in');
-  const inputCheckOutEl = document.getElementById('check-out');
 
   if (selectedDateCheckIN === undefined) {
     selectedDateCheckIN = dateCheck;
@@ -365,9 +411,9 @@ const selectedDate = (event, selector) => {
     selectedDateCheckOut = undefined;
     selectedDateCheckIN = dateCheck;
   }
+  addValueInInput();
+  changeCalendar();
   console.log(selectedDateCheckIN, selectedDateCheckOut);
-  inputCheckInEl.setAttribute('value', `${selectedDateCheckIN.toLocaleDateString('ru')}`);
-  inputCheckOutEl.setAttribute('value', `${selectedDateCheckOut.toLocaleDateString('ru')}`);
 };
 
 calendarForClickFirstEl.addEventListener('click', (event) => {
