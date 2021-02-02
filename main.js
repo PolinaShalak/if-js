@@ -528,6 +528,25 @@ const homesElements = document.getElementById('homes-cards');
 
 const screenBrowserWidth = window.screen.availWidth;
 
+function addHomesCards(array) {
+  array.forEach((item, index) => {
+    const el = document.createElement('div');
+    el.classList.add('col-3', 'col-xs-3', 'col-sm-2', 'cards');
+    el.innerHTML = `
+   <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
+   <a class="homes__link" href="">${item.name}</a>
+   <p class="homes__text">${item.city}, ${item.country}</p>
+   `;
+    homesElements.appendChild(el);
+    if (index > 3) {
+      el.classList.add('display-none');
+    }
+    if (index > 1 && screenBrowserWidth < 768) {
+      el.classList.add('display-none');
+    }
+  });
+}
+
 (async () => {
   let dataHomes;
   if (!sessionStorage.getItem('homes')) {
@@ -544,21 +563,48 @@ const screenBrowserWidth = window.screen.availWidth;
   if (!dataHomes) {
     console.log('Array dataHomes not found');
   } else {
-    dataHomes.forEach((item, index) => {
-      const el = document.createElement('div');
-      el.classList.add('col-3', 'col-xs-3', 'col-sm-2');
-      el.innerHTML = `
-   <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
-   <a class="homes__link" href="">${item.name}</a>
-   <p class="homes__text">${item.city}, ${item.country}</p>
-   `;
-      homesElements.appendChild(el);
-      if (index > 3) {
-        el.classList.add('display-none');
-      }
-      if (index > 1 && screenBrowserWidth < 768) {
-        el.classList.add('display-none');
-      }
-    });
+    addHomesCards(dataHomes);
   }
 })();
+
+// слайдер
+const homesArrowNextEl = document.getElementById('homes__arrow-next');
+const homesArrowBackEl = document.getElementById('homes__arrow-back');
+
+let startNumberSlider = 0;
+let nextNumberSlider = 4;
+
+const homesCardsElements = document.querySelectorAll('.cards');
+console.log(homesCardsElements);
+
+homesArrowNextEl.addEventListener('click', () => {
+  homesCardsElements[startNumberSlider].classList.add('display-none');
+  homesCardsElements[nextNumberSlider].classList.remove('display-none');
+
+  if (nextNumberSlider === 7) {
+    homesArrowNextEl.classList.add('display-none');
+    return;
+  }
+  startNumberSlider++;
+  nextNumberSlider++;
+
+  if (startNumberSlider > 0) {
+    homesArrowBackEl.classList.remove('display-none');
+  }
+  console.log(homesCardsElements[nextNumberSlider]);
+});
+
+homesArrowBackEl.addEventListener('click', () => {
+  if (nextNumberSlider === homesCardsElements.length - 1) {
+    homesArrowNextEl.classList.remove('display-none');
+  }
+
+  homesCardsElements[nextNumberSlider].classList.add('display-none');
+  homesCardsElements[startNumberSlider].classList.remove('display-none');
+  if (startNumberSlider === 0) {
+    homesArrowBackEl.classList.add('display-none');
+    return;
+  }
+  startNumberSlider--;
+  nextNumberSlider--;
+});
