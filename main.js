@@ -581,7 +581,7 @@ homesArrowNextEl.addEventListener('click', () => {
   homesCardsElements[startNumberSlider].classList.add('display-none');
   homesCardsElements[nextNumberSlider].classList.remove('display-none');
 
-  if (nextNumberSlider === 7) {
+  if (nextNumberSlider === homesCardsElements.length - 1) {
     homesArrowNextEl.classList.add('display-none');
     return;
   }
