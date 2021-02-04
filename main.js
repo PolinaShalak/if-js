@@ -46,6 +46,7 @@ function checkPalindrome(word) {
   }
   return false;
 }
+
 console.log(checkPalindrome('abcecba')); // true
 
 // функция, которая возвращает меньшее из чисел
@@ -55,6 +56,7 @@ function min(a, b) {
   }
   return b;
 }
+
 console.log(min(4, 7)); // 4
 
 // функция, которая возвращает большее из чисел
@@ -64,18 +66,21 @@ function max(a, y) {
   }
   return y;
 }
+
 console.log(max(4, 7)); // 7
 
 // функция min с тернарным оператором
 function min1(a, b) {
   return a < b ? a : b;
 }
+
 console.log(min1(10, 11));
 
 // функция max с тернарным оператором
 function max1(a, y) {
   return a > y ? a : y;
 }
+
 console.log(max1(22, 5));
 
 // функция, которая заменяет все 0 на строку 'zero'
@@ -86,6 +91,7 @@ function createRandomArray() {
   }
   return array3;
 }
+
 const arrayRandom = createRandomArray();
 console.log(arrayRandom);
 
@@ -100,6 +106,7 @@ function changeZero(array) {
   }
   return array5;
 }
+
 console.log(changeZero(arrayRandom));
 
 // функция сложения с замыканием
@@ -108,6 +115,7 @@ function sum3(a) {
     return a + b;
   };
 }
+
 console.log(sum3(4)(10)); // 14
 
 // абзацы меняют цвета из массива по клику
@@ -282,9 +290,13 @@ const nextMonthCalendar = function () {
 // добавляет html и css в блок с календарем
 function createCalendarInHTML(item, calendarElements) {
   const el = document.getElementById(calendarElements);
-  let selectedDayIn; let selectedMonthIn; let
+  let selectedDayIn;
+  let selectedMonthIn;
+  let
     selectedYearIn; // выбранную дату разбиваю на другие переменные
-  let selectedDayOut; let selectedMonthOut; let
+  let selectedDayOut;
+  let selectedMonthOut;
+  let
     selectedYearOut;
   if (selectedDateCheckIN !== undefined) { // если дата не undef, присваиваю переменым значение
     selectedDayIn = selectedDateCheckIN.getDate();
@@ -309,19 +321,19 @@ function createCalendarInHTML(item, calendarElements) {
       }
       // добавляю класс выбранным дням
       if (days.numberYear === selectedYearIn
-          && days.currentMonth === selectedMonthIn
-          && days.dayOfMonth === selectedDayIn) {
+                && days.currentMonth === selectedMonthIn
+                && days.dayOfMonth === selectedDayIn) {
         day.classList.add('calendar__selected-days');
       }
       if (days.numberYear === selectedYearOut
-          && days.currentMonth === selectedMonthOut
-          && days.dayOfMonth === selectedDayOut) {
+                && days.currentMonth === selectedMonthOut
+                && days.dayOfMonth === selectedDayOut) {
         day.classList.add('calendar__selected-days');
       }
       day.classList.add('cell-days');
       // добавляю класс прошедшим дням
       if (days.numberYear < yearNow
-          || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
+                || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
         day.textContent = `${days.dayOfMonth}`;
         day.classList.add('calendar__grey-days');
         week.appendChild(day);
@@ -528,16 +540,16 @@ const homesElements = document.getElementById('homes-cards');
 
 const screenBrowserWidth = window.screen.availWidth;
 
-function addHomesCards(array) {
+function addHomesCards(array, element, nameCards = 'cards') {
   array.forEach((item, index) => {
     const el = document.createElement('div');
-    el.classList.add('col-3', 'col-xs-3', 'col-sm-2', 'cards');
+    el.classList.add('col-3', 'col-xs-3', 'col-sm-2', nameCards);
     el.innerHTML = `
    <img class="homes__images" src ="${item.imageUrl}" alt="${item.name}">
    <a class="homes__link" href="">${item.name}</a>
    <p class="homes__text">${item.city}, ${item.country}</p>
    `;
-    homesElements.appendChild(el);
+    element.appendChild(el);
     if (index > 3) {
       el.classList.add('display-none');
     }
@@ -563,48 +575,104 @@ function addHomesCards(array) {
   if (!dataHomes) {
     console.log('Array dataHomes not found');
   } else {
-    addHomesCards(dataHomes);
+    addHomesCards(dataHomes, homesElements);
   }
 })();
 
 // слайдер
-const homesArrowNextEl = document.getElementById('homes__arrow-next');
-const homesArrowBackEl = document.getElementById('homes__arrow-back');
+function slider(arrowNextEl, arrowBackEl, cardsSelector) {
+  const homesArrowNextEl = document.getElementById(arrowNextEl);
+  const homesArrowBackEl = document.getElementById(arrowBackEl);
 
-let startNumberSlider = 0;
-let nextNumberSlider = 4;
+  let startNumberSlider = 0;
+  let nextNumberSlider = 4;
 
-const homesCardsElements = document.querySelectorAll('.cards');
-console.log(homesCardsElements);
+  const homesCardsElements = document.querySelectorAll(cardsSelector);
+  console.log(homesCardsElements);
 
-homesArrowNextEl.addEventListener('click', () => {
-  homesCardsElements[startNumberSlider].classList.add('display-none');
-  homesCardsElements[nextNumberSlider].classList.remove('display-none');
+  homesArrowNextEl.addEventListener('click', () => {
+    homesCardsElements[startNumberSlider].classList.add('display-none');
+    homesCardsElements[nextNumberSlider].classList.remove('display-none');
 
-  if (nextNumberSlider === homesCardsElements.length - 1) {
-    homesArrowNextEl.classList.add('display-none');
-    return;
+    if (nextNumberSlider === homesCardsElements.length - 1) {
+      homesArrowNextEl.classList.add('display-none');
+      return;
+    }
+    startNumberSlider++;
+    nextNumberSlider++;
+
+    if (startNumberSlider > 0) {
+      homesArrowBackEl.classList.remove('display-none');
+    }
+    console.log(homesCardsElements[nextNumberSlider]);
+  });
+
+  homesArrowBackEl.addEventListener('click', () => {
+    if (nextNumberSlider === homesCardsElements.length - 1) {
+      homesArrowNextEl.classList.remove('display-none');
+    }
+
+    homesCardsElements[nextNumberSlider].classList.add('display-none');
+    homesCardsElements[startNumberSlider].classList.remove('display-none');
+    if (startNumberSlider === 0) {
+      homesArrowBackEl.classList.add('display-none');
+      return;
+    }
+    startNumberSlider--;
+    nextNumberSlider--;
+  });
+}
+
+slider('homes__arrow-next', 'homes__arrow-back', '.cards');
+
+// поиск и отправка формы
+
+const formEl = document.getElementById('header__form');
+const formDestinationEl = document.getElementById('city');
+const availableHotelsEl = document.getElementById('available--hotels');
+formEl.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const search1 = formDestinationEl.value.toLowerCase().trim();
+
+  const res = await fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${search1
+  }&dateFrom=${selectedDateCheckIN.getTime()}&dateTo=${selectedDateCheckOut.getTime()}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((result) => result)
+    .catch((error) => console.log(error.message));
+  if (res.length === 0) {
+    if (availableHotelsEl.classList.contains('green')) {
+      availableHotelsEl.classList.remove('green');
+    }
+    availableHotelsEl.classList.add('red');
+    availableHotelsEl.innerHTML = `
+    <div class="container">
+        <h2 class="title">Available hotels</h2>
+        <p class="available--text">Unfortunately, your search returned no results </p>
+    </div>
+    `;
   }
-  startNumberSlider++;
-  nextNumberSlider++;
-
-  if (startNumberSlider > 0) {
-    homesArrowBackEl.classList.remove('display-none');
+  if (res.length !== 0) {
+    availableHotelsEl.classList.add('green');
+    availableHotelsEl.innerHTML = `
+    <div class="container">
+        <h2 class="title">Available hotels</h2>
+        <div class="row" id="available--cards">
+        <svg class="available__svg_arrow-back display-none" id="available__arrow-back">
+            <use href="#arrow"></use>
+        </svg>
+        <svg class="homes__svg_arrow-next" id="available__arrow-next">
+            <use href="#arrow"></use>
+        </svg>
+    </div>
+    `;
+    const availableCardsEl = document.getElementById('available--cards');
+    addHomesCards(res, availableCardsEl, 'availableCards');
   }
-  console.log(homesCardsElements[nextNumberSlider]);
-});
-
-homesArrowBackEl.addEventListener('click', () => {
-  if (nextNumberSlider === homesCardsElements.length - 1) {
-    homesArrowNextEl.classList.remove('display-none');
-  }
-
-  homesCardsElements[nextNumberSlider].classList.add('display-none');
-  homesCardsElements[startNumberSlider].classList.remove('display-none');
-  if (startNumberSlider === 0) {
-    homesArrowBackEl.classList.add('display-none');
-    return;
-  }
-  startNumberSlider--;
-  nextNumberSlider--;
+  slider('available__arrow-next', 'available__arrow-back', '.availableCards');
+  console.log(res);
 });

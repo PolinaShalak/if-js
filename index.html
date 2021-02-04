@@ -88,12 +88,13 @@
         </div>
         <h1 class="h1">Discover stays<br>
             to live, work or just relax</h1>
+        <form id="header__form">
         <div class="header__forms">
             <div class="form__your-destination">
                 <svg class="search">
                     <use href="#search"></use>
                 </svg>
-                <input id="city" class="form__input--your-destination" type="text" placeholder="New York">
+                <input id="city" value="" class="form__input--your-destination" type="text" placeholder="New York">
                 <label for="city" class="form__label--your-destination form__labels_all">Your destination or hotel name</label>
             </div>
             <div class="form__check" id="form__check">
@@ -121,7 +122,7 @@
                 </div>
             </div>
             <div class="form__button">
-                <button class="form__button__text" type="submit">Search</button>
+                <button id="form--button" class="form__button__text" type="submit">Search</button>
             </div>
             <div class="header__calendar display-none" id="header__calendar">
                 <div class="calendar__month" id="calendar__id-for-click-first">
@@ -160,6 +161,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <div class="header__apps">
             <div>
                 <svg class="header__google-play">
@@ -174,6 +176,47 @@
         </div>
     </div>
 </header>
+<div class="available" id="available--hotels">
+</div>
+<div class="offers">
+    <div class="container">
+        <h2 class="text-center active">What do we offer</h2>
+        <div class="offers__row">
+            <div class="col-3 col-xs-6 col-sm-3">
+                <div class="offers__images">
+                    <svg class="offers__svg--support">
+                        <use href="#support"></use>
+                    </svg>
+                </div>
+                <p class="offers__text">Support 24/7</p>
+            </div>
+            <div class="col-3 col-xs-6 col-sm-3">
+                <div class="offers__images">
+                    <svg class="offers__svg--communicate">
+                        <use href="#communicate"></use>
+                    </svg>
+                </div>
+                <p class="offers__text">Communicate directly</p>
+            </div>
+            <div class="col-3 col-xs-6 col-sm-3">
+                <div class="offers__images">
+                    <svg class="offers__svg--book">
+                        <use href="#book"></use>
+                    </svg>
+                </div>
+                <p class="offers__text">Book online</p>
+            </div>
+            <div class="col-3 col-xs-6 col-sm-3">
+                <div class="offers__images">
+                    <svg class="offers__svg--like">
+                        <use href="#like"></use>
+                    </svg>
+                </div>
+                <p class="offers__text">Real guest reviews</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="homes">
     <div class="container">
         <h2 class="title">Homes guests loves</h2>
@@ -187,6 +230,245 @@
         </div>
     </div>
 </div>
+<div class="best-destinations">
+    <div class="container">
+        <h2 class="text-center h2">The best destinations</h2>
+        <div class="best-destinations__tabs">
+            <button class="button best-destinations__button--regions">Regions</button>
+            <button class="button best-destinations__button--sities">Cities</button>
+            <button class="button best-destinations__button--places">Places of interest</button>
+            <button class="button best-destinations__button--mobile">Places</button>
+        </div>
+        <div class="row">
+            <div class="col-3 col-xs-3 col-sm-2">
+                <div class="positions-for-booknow">
+                    <div class="best-destinations__fill">
+                        <img class="best-destinations__images" src="./images/maldives.jpg" alt="Maldives">
+                        <div class="best-destinations--book-now">
+                            <a class="best-destinations--book-now__link" href="">Book now</a>
+                        </div>
+                    </div>
+                </div>
+                <a class="homes__link" href="">Maldives</a>
+            </div>
+            <div class="col-3 col-xs-3 col-sm-2">
+                <div class="positions-for-booknow">
+                    <div class="best-destinations__fill ">
+                        <img class="best-destinations__images" src="./images/spain.jpg" alt="Spain">
+                        <div class="best-destinations--book-now">
+                            <a class="best-destinations--book-now__link" href="">Book now</a>
+                        </div>
+                    </div>
+                </div>
+                <a class="homes__link" href="">Spain</a>
+            </div>
+            <div class="col-3 homes__images--display-none">
+                <div class="positions-for-booknow">
+                    <div class="best-destinations__fill">
+                        <img class="best-destinations__images" src="./images/norway.jpg" alt="Norway">
+                        <div class="best-destinations--book-now">
+                            <a class="best-destinations--book-now__link" href="">Book now</a>
+                        </div>
+                    </div>
+                </div>
+                <a class="homes__link" href="">Norway</a>
+            </div>
+            <div class="col-3 homes__images--display-none">
+                <div class="positions-for-booknow">
+                    <div class="best-destinations__fill">
+                        <img class="best-destinations__images" src="./images/island.jpg" alt="Island">
+                        <div class="best-destinations--book-now">
+                            <a class="best-destinations--book-now__link" href="">Book now</a>
+                        </div>
+                    </div>
+                </div>
+                <a class="homes__link" href="">Island</a>
+            </div>
+            <svg class="best-destinations__svg_arrow">
+                <use href="#arrow"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+<div class="sign-up">
+    <div class="container">
+        <div class="sign">
+            <svg class="sign__svg--user">
+                <use href="#user"></use>
+            </svg>
+            <div class="sign__logo__background">
+                <svg class="sign__svg--logo">
+                    <use href="#logo"></use>
+                </svg>
+            </div>
+            <div>
+                <p class="sign-up__text">Sign up and get 20% off your first booking</p>
+                <p class="sign-up__text--mobile">Sign up in the app and get 20%<br> off your first booking</p>
+                <div class="sign-up__link-button">
+                    <a class="sign-up__link" href="">Sign up</a>
+                </div>
+            </div>
+            <div class="sign-up__svg--close">
+                <svg class="sign-up--close">
+                    <use href="#close"></use>
+                </svg>
+            </div>
+            <div >
+                <a class="sign-up__link--mobile" href="">Install</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="guests-reviews">
+    <div class="container">
+        <h2 class="text-center h2">Guests reviews</h2>
+        <div class="row">
+            <div class="col-4 col-xs-6">
+                <div class="guests-background">
+                    <div class="guests__images__all">
+                        <img class="guests__images" src="./images/guests-1.jpg" alt="Ubud Bali Resort&SPA">
+                        <div class="guests__price">
+                            <p class="guests__price__text">From 250 USD</p>
+                        </div>
+                    </div>
+                    <div class="guests__all">
+                        <div class="guests__places">
+                            <p class="guests__plases_hotels">Ubud Bali Resort&SPA</p>
+                            <p class="guests__plases_country">Bali, Indonesia</p>
+                        </div>
+                        <div class="guests__mark__reviews">
+                            <p class="guests__mark">9,4</p>
+                            <p class="guests__reviews">1324 reviews</p>
+                        </div>
+                    </div>
+                    <div class="guests__comment">
+                        <svg class="guests__acount">
+                            <use href="#acount"></use>
+                        </svg>
+                        <div class="guests__names-destination">
+                            <p class="guests__names">Hanna Ivanova</p>
+                            <div class="guests__country">
+                                <img src="./images/flag-ukrain.png" alt="flag">
+                                <p class="guests__destination">Ukraine</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guests__comment__text">
+                        <p>Great location, really pleasant and clean rooms, but the thing that makes this such a good place to stay are the staff. All of the people are incredibly helpful and generous with their time and advice.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xs-6 guests__display-none">
+                <div class="guests-background">
+                    <div class="guests__images__all" >
+                        <img class="guests__images" src="./images/guests-2.jpg" alt="King Kong Hostel">
+                        <div class="guests__price">
+                            <p class="guests__price__text">From 40 USD</p>
+                        </div>
+                    </div>
+                    <div class="guests__all">
+                        <div class="guests__places">
+                            <p class="guests__plases_hotels">King Kong Hostel</p>
+                            <p class="guests__plases_country">Rotterdam, Netherlands</p>
+                        </div>
+                        <div class="guests__mark__reviews">
+                            <p class="guests__mark">8,9</p>
+                            <p class="guests__reviews">2016 reviews</p>
+                        </div>
+                    </div>
+                    <div class="guests__comment">
+                        <svg class="guests__acount">
+                            <use href="#acount"></use>
+                        </svg>
+                        <div class="guests__names-destination">
+                            <p class="guests__names">Adam Smith</p>
+                            <div class="guests__country">
+                                <img src="./images/flag-usa.png" alt="flag">
+                                <p class="guests__destination">USA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guests__comment__text">
+                        <p>I've been in this hostel for a month and here is the best hostel of all <br>
+                            Excellent management of excellent and ethical staff and bedrooms Bathrooms are always clean and excellent <br>
+                            Most importantly, those who work here are kind and good-natured.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xs-6 guests__display-none">
+                <div class="guests-background">
+                    <div class="guests__images__all" >
+                        <img class="guests__images" src="./images/guests-3.jpg" alt="Rokoko Hotel">
+                        <div class="guests__price">
+                            <p class="guests__price__text">From 100 USD</p>
+                        </div>
+                    </div>
+                    <div class="guests__all">
+                        <div class="guests__places">
+                            <p class="guests__plases_hotels">Rokoko Hotel</p>
+                            <p class="guests__plases_country">Ourika, Marocco</p>
+                        </div>
+                        <div class="guests__mark__reviews">
+                            <p class="guests__mark">9,1</p>
+                            <p class="guests__reviews">815 reviews</p>
+                        </div>
+                    </div>
+                    <div class="guests__comment">
+                        <svg class="guests__acount">
+                            <use href="#acount"></use>
+                        </svg>
+                        <div class="guests__names-destination">
+                            <p class="guests__names">Anika Messer</p>
+                            <div class="guests__country">
+                                <img src="./images/flag-germany.png" alt="flag">
+                                <p class="guests__destination">Germany</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guests__comment__text">
+                        <p>Efficient, friendly, professional, and appropriately attentive. Great hotel in a great location. Easy access to all the surrounding historical sites. Staff is fantastic. Will definitely stay at this location during my next stay in Marocco.</p>
+                    </div>
+                </div>
+            </div>
+            <svg class="guests__svg_arrow">
+                <use href="#arrow"></use>
+            </svg>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__logo">
+            <svg class="footer__logo--display-none">
+                <use href="#logo"></use>
+            </svg>
+        </div>
+        <div class="footer__lists__all">
+            <ul class="footer__list col-4 col-xs-2 col-sm-2">
+                <li class="footer__heading"><a class="footer__link" href="">About</a></li>
+                <li><a class="footer__link" href="">How Triphouse works</a></li>
+                <li><a class="footer__link" href="">Careers</a></li>
+                <li><a class="footer__link" href="">Privacy</a></li>
+                <li><a class="footer__link" href="">Terms</a></li>
+            </ul>
+            <ul class="footer__list col-4 col-xs-2 col-sm-2">
+                <li class="footer__heading m-for-footer"><a class="footer__link" href="">Property types</a></li>
+                <li><a class="footer__link" href="">Guest houses</a></li>
+                <li><a class="footer__link" href="">Hotels</a></li>
+                <li><a class="footer__link" href="">Apartments</a></li>
+                <li><a class="footer__link" href="">Villas</a></li>
+                <li><a class="footer__link" href="">Holiday homes</a></li>
+                <li><a class="footer__link" href="">Hostels</a></li>
+            </ul>
+            <ul class="footer__list col-4 col-xs-2 col-sm-2">
+                <li class="footer__heading"><a class="footer__link" href="">Support</a></li>
+                <li><a class="footer__link" href="">Contact Customer Service</a></li>
+                <li><a class="footer__link" href="">FAQ</a></li>
+            </ul>
+        </div>
+        <p class="footer__bottom-text">&copy; 2020 Triphouse, Inc. All rights reserved</p>
+    </div>
+</footer>
 <script src="main.js"></script>
 </body>
 </html>
