@@ -559,6 +559,20 @@ function addHomesCards(array, element, nameCards = 'cards') {
   });
 }
 
+function bubbleSort(array) {
+  for (let n = 0; n < array.length; n++) {
+    for (let i = 0; i < array.length - 1 - n; i++) {
+      if (array[i].name > array[i + 1].name) {
+        const buff = array[i].name;
+        array[i].name = array[i + 1].name;
+        array[i + 1].name = buff;
+      }
+    }
+  }
+  return array;
+}
+
+// запрос массива dataHomes
 (async () => {
   let dataHomes;
   if (!sessionStorage.getItem('homes')) {
@@ -575,6 +589,7 @@ function addHomesCards(array, element, nameCards = 'cards') {
   if (!dataHomes) {
     console.log('Array dataHomes not found');
   } else {
+    bubbleSort(dataHomes);
     addHomesCards(dataHomes, homesElements);
   }
 })();
@@ -588,7 +603,11 @@ function slider(arrowNextEl, arrowBackEl, cardsSelector) {
   let nextNumberSlider = 4;
 
   const homesCardsElements = document.querySelectorAll(cardsSelector);
-  console.log(homesCardsElements);
+  //  console.log(homesCardsElements);
+
+  if (homesCardsElements.length <= 3) {
+    homesArrowNextEl.classList.add('display-none');
+  }
 
   homesArrowNextEl.addEventListener('click', () => {
     homesCardsElements[startNumberSlider].classList.add('display-none');
@@ -626,7 +645,6 @@ function slider(arrowNextEl, arrowBackEl, cardsSelector) {
 slider('homes__arrow-next', 'homes__arrow-back', '.cards');
 
 // поиск и отправка формы
-
 const formEl = document.getElementById('header__form');
 const formDestinationEl = document.getElementById('city');
 const availableHotelsEl = document.getElementById('available--hotels');
@@ -657,6 +675,7 @@ formEl.addEventListener('submit', async (event) => {
     `;
   }
   if (res.length !== 0) {
+    bubbleSort(res);
     availableHotelsEl.classList.add('green');
     availableHotelsEl.innerHTML = `
     <div class="container">
