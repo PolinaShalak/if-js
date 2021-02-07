@@ -380,7 +380,7 @@ function addClick(event) {
     monthNumber++;
   }
   if (event.currentTarget === calendarArrowBack) {
-    if (monthNumber === 0) return;
+    if (monthNumber === monthNow) return;
     monthNumber--;
   }
   console.log(monthNumber);
