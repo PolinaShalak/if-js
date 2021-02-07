@@ -15,7 +15,7 @@ test = Boolean(test);
 console.log(test); // true
 console.log(typeof test);
 
-// произведение элементов
+// product of elements
 const array1 = [2, 3, 5, 8];
 let productOfNumbers = array1[0];
 for (let i = 1; i < array1.length; i++) {
@@ -23,7 +23,7 @@ for (let i = 1; i < array1.length; i++) {
 }
 console.log(productOfNumbers);
 
-//  элементы массива, которые больше 5, но меньше 10
+//  array elements that are greater than 5 but less than 10
 const array2 = [2, 5, 8, 15, 0, 6, 20, 3];
 for (let i = 0; i < array2.length; i++) {
   if (array2[i] > 5 && array2[i] < 10) {
@@ -31,16 +31,16 @@ for (let i = 0; i < array2.length; i++) {
   }
 }
 
-// четные элементы массива
+// even array elements
 for (let i = 0; i < array2.length; i++) {
   if (array2[i] % 2 === 0) {
     console.log(array2[i]);
   }
 }
 
-// функция palindrome (cлово палиндром может читаться справа-налево и слева-направо одинаково)
+// palindrome function (the word palindrome can be read right-to-left and left-to-right the same)
 function checkPalindrome(word) {
-  const wordReverse = word.split('').reverse().join(''); // split() - разбивает строки на массив, reverse() - обратный порядок элементов, join('') - объедияет  элементы массива в строку
+  const wordReverse = word.split('').reverse().join('');
   if (wordReverse === word) {
     return true;
   }
@@ -49,7 +49,7 @@ function checkPalindrome(word) {
 
 console.log(checkPalindrome('abcecba')); // true
 
-// функция, которая возвращает меньшее из чисел
+// a function that returns the smaller of the numbers
 function min(a, b) {
   if (a < b) {
     return a;
@@ -59,7 +59,7 @@ function min(a, b) {
 
 console.log(min(4, 7)); // 4
 
-// функция, которая возвращает большее из чисел
+// a function that returns the larger of the numbers
 function max(a, y) {
   if (a > y) {
     return a;
@@ -69,21 +69,21 @@ function max(a, y) {
 
 console.log(max(4, 7)); // 7
 
-// функция min с тернарным оператором
+// min function with ternary operator
 function min1(a, b) {
   return a < b ? a : b;
 }
 
 console.log(min1(10, 11));
 
-// функция max с тернарным оператором
+// max function with ternary operator
 function max1(a, y) {
   return a > y ? a : y;
 }
 
 console.log(max1(22, 5));
 
-// функция, которая заменяет все 0 на строку 'zero'
+// a function that replaces all numbers 0 with a string  'zero'
 function createRandomArray() {
   const array3 = [];
   for (let i = 0; i < 10; i++) {
@@ -109,7 +109,7 @@ function changeZero(array) {
 
 console.log(changeZero(arrayRandom));
 
-// функция сложения с замыканием
+// closure addition function
 function sum3(a) {
   return function (b) {
     return a + b;
@@ -118,7 +118,7 @@ function sum3(a) {
 
 console.log(sum3(4)(10)); // 14
 
-// абзацы меняют цвета из массива по клику
+// paragraphs change colors from array on click
 // const text1El = document.getElementById('text1');
 // const text2El = document.getElementById('text2');
 // const text3El = document.getElementById('text3');
@@ -136,12 +136,12 @@ console.log(sum3(4)(10)); // 14
 // text2El.addEventListener('click', count());
 // text3El.addEventListener('click', count());
 
-// преобразование формата даты из '2020-11-26' в '26.11.2020'
+// date format conversion from  '2020-11-26' to '26.11.2020'
 const dateChang = '2020-11-26';
 const dateReverse = (date1) => date1.split('-').reverse().join('.');
 console.log(dateReverse(dateChang));
 
-// поиск объектов размещения
+// object search
 const data = [
   {
     country: 'Russia',
@@ -185,7 +185,7 @@ const data = [
   },
 ];
 
-// поиск
+// search
 const replaceStrForSearch = (str) => str.toLowerCase().replaceAll(' ', '');
 const search = (str) => {
   const searchStr = replaceStrForSearch(str);
@@ -203,8 +203,8 @@ const search = (str) => {
 
 console.log(search('Ber'));
 
-// календарь
-// каленарь добавляется и удаляется при клике
+// calendar
+// calendar is added and removed on click
 const calendarElement = document.getElementById('header__calendar');
 const formsWithDateElement = document.getElementById('form__check');
 formsWithDateElement.addEventListener('click', (event) => {
@@ -229,7 +229,7 @@ let monthNumber = new Date().getMonth();
 let selectedDateCheckIN;
 let selectedDateCheckOut;
 
-// возвращает массив с датами
+// returns an array with dates
 const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, yearCount) => {
   const daysInWeek = 7;
   const date = new Date(yearNumber, monthCount + 1, 0);
@@ -276,7 +276,7 @@ const getCalendarMonth = (checkInDate, checkOutDate, monthCount, elementID, year
   return calendarArray;
 };
 
-// в переменную добавляется массив с датами
+// an array with dates is added to the variable
 const currentMonthCalendar = function () {
   return getCalendarMonth(5, 10,
     monthNumber, 'month', yearNumber);
@@ -287,22 +287,20 @@ const nextMonthCalendar = function () {
     monthNumber + 1, 'month-next', yearNumber);
 };
 
-// добавляет html и css в блок с календарем
+// adds html and css to the calendar block
 function createCalendarInHTML(item, calendarElements) {
   const el = document.getElementById(calendarElements);
   let selectedDayIn;
   let selectedMonthIn;
-  let
-    selectedYearIn; // выбранную дату разбиваю на другие переменные
+  let selectedYearIn; // split the selected date into other variables
   let selectedDayOut;
   let selectedMonthOut;
-  let
-    selectedYearOut;
-  if (selectedDateCheckIN !== undefined) { // если дата не undef, присваиваю переменым значение
+  let selectedYearOut;
+  if (selectedDateCheckIN !== undefined) {
     selectedDayIn = selectedDateCheckIN.getDate();
     selectedMonthIn = selectedDateCheckIN.getMonth();
     selectedYearIn = selectedDateCheckIN.getFullYear();
-  }
+  }// If the date is not undef, assign a value to the variables
   if (selectedDateCheckOut !== undefined) {
     selectedDayOut = selectedDateCheckOut.getDate();
     selectedMonthOut = selectedDateCheckOut.getMonth();
@@ -319,7 +317,7 @@ function createCalendarInHTML(item, calendarElements) {
         week.appendChild(day);
         return;
       }
-      // добавляю класс выбранным дням
+      // add class to selected days
       if (days.numberYear === selectedYearIn
                 && days.currentMonth === selectedMonthIn
                 && days.dayOfMonth === selectedDayIn) {
@@ -331,14 +329,14 @@ function createCalendarInHTML(item, calendarElements) {
         day.classList.add('calendar__selected-days');
       }
       day.classList.add('cell-days');
-      // добавляю класс прошедшим дням
+      // adding a class to the days gone
       if (days.numberYear < yearNow
                 || (days.currentMonth <= monthNow && days.dayOfMonth < dayNow)) {
         day.textContent = `${days.dayOfMonth}`;
         day.classList.add('calendar__grey-days');
         week.appendChild(day);
       }
-      // добавляю класс текущему дню
+      // adding a class to the current day
       if (days.currentDay && days.currentMonth === monthNow && days.numberYear === yearNow) {
         day.textContent = `${days.dayOfMonth}`;
         day.classList.add('calendar__current-day');
@@ -362,7 +360,7 @@ const deleteCalendar = () => {
   calendarNextEl.innerHTML = '';
 };
 
-// удаляет календарь и добавляет новый с изменениями
+// deletes the calendar and adds a new one with changes
 function changeCalendar() {
   deleteCalendar();
   createCalendarInHTML(currentMonthCalendar(), 'calendar');
@@ -372,7 +370,7 @@ function changeCalendar() {
 const calendarArrowBack = document.getElementById('calendar__arrow-back');
 const calendarArrowNext = document.getElementById('calendar__arrow-next');
 
-// добавляется событие на стрелки
+// event is added to the arrows
 function addClick(event) {
   if (event.currentTarget === calendarArrowNext) {
     monthNumber++;
@@ -401,7 +399,6 @@ const addValueInInput = () => {
     return;
   }
   inputCheckOutEl.value = selectedDateCheckOut.toLocaleDateString('ru');
-  calendarElement.classList.toggle('display-none');
 };
 
 const selectedDate = (event, selector) => {
@@ -507,7 +504,7 @@ class Students {
 const students = new Students(studentsData);
 console.log(students.getInfo());
 
-// // абзацы меняют цвета из массива по клику
+// // paragraphs change colors from array on click
 // const text1El = document.getElementById('text1');
 // const text2El = document.getElementById('text2');
 // const text3El = document.getElementById('text3');
@@ -572,7 +569,7 @@ function bubbleSort(array) {
   return array;
 }
 
-// запрос массива dataHomes
+// array dataHomes query
 (async () => {
   let dataHomes;
   if (!sessionStorage.getItem('homes')) {
@@ -594,7 +591,7 @@ function bubbleSort(array) {
   }
 })();
 
-// слайдер
+// slider
 function slider(arrowNextEl, arrowBackEl, cardsSelector) {
   const homesArrowNextEl = document.getElementById(arrowNextEl);
   const homesArrowBackEl = document.getElementById(arrowBackEl);
@@ -663,10 +660,10 @@ formEl.addEventListener('submit', async (event) => {
     .then((result) => result)
     .catch((error) => console.log(error.message));
   if (res.length === 0) {
-    if (availableHotelsEl.classList.contains('green')) {
-      availableHotelsEl.classList.remove('green');
+    if (availableHotelsEl.classList.contains('background__successfully')) {
+      availableHotelsEl.classList.remove('background__successfully');
     }
-    availableHotelsEl.classList.add('red');
+    availableHotelsEl.classList.add('background__not-successfully');
     availableHotelsEl.innerHTML = `
     <div class="container">
         <h2 class="title">Available hotels</h2>
@@ -676,7 +673,7 @@ formEl.addEventListener('submit', async (event) => {
   }
   if (res.length !== 0) {
     bubbleSort(res);
-    availableHotelsEl.classList.add('green');
+    availableHotelsEl.classList.add('background__successfully');
     availableHotelsEl.innerHTML = `
     <div class="container">
         <h2 class="title">Available hotels</h2>

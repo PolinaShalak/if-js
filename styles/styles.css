@@ -11,6 +11,8 @@
     --gray200: #1d1e1f;
     --gray300: #4d4d4d;
     --background-gray: #eaf0f9;
+    --background-red: rgba(205, 92, 92, 0.15);
+    --background-green: rgba(46, 139, 87, 0.15);
 
     --col-size: calc(100% / 12);
 
@@ -371,6 +373,7 @@ input::placeholder {
     height: 18px;
     position: absolute;
     top: 15px;
+    cursor: pointer;
 }
 
 .calendar__arrow-next {
@@ -416,14 +419,17 @@ input::placeholder {
 
 .cell-days:hover {
     background-color: var(--secondary-text);
+    cursor: pointer;
 }
 
 .calendar__grey-days:hover {
     background-color: var(--white);
+    cursor: auto;
 }
 
 .calendar__current-day {
     color: var(--primary);
+    cursor: pointer;
 }
 
 .calendar__grey-days {
@@ -433,6 +439,7 @@ input::placeholder {
 .calendar__selected-days {
     background-color: var(--primary);
     color: var(--white);
+    cursor: pointer;
 }
 
 .calendar__selected-days:hover {
@@ -516,12 +523,12 @@ input::placeholder {
     font-size: 24px;
 }
 
-.red {
-    background-color: rgba(205, 92, 92, 0.15);
+.background__not-successfully {
+    background-color: var(--background-red);
 }
 
-.green {
-    background-color: rgba(46, 139, 87, 0.15);
+.background__successfully {
+    background-color: var(--background-green);
 }
 
 .row {
@@ -580,6 +587,7 @@ input::placeholder {
     width: 48px;
     height: 48px;
     position: absolute;
+    cursor: pointer;
 }
 
 .homes__svg_arrow-back {
