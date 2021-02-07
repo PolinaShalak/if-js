@@ -561,28 +561,40 @@ function addHomesCards(array, element, nameCards = 'cards') {
 }
 
 function bubbleSort(array) {
+  let counter;
+  let buff;
   for (let n = 0; n < array.length; n++) {
     for (let i = 0; i < array.length - 1 - n; i++) {
       if (array[i].name > array[i + 1].name) {
-        const buff = array[i].name;
+        buff = array[i].name;
         array[i].name = array[i + 1].name;
         array[i + 1].name = buff;
       }
     }
+    if (counter === buff) return array;
+    counter = buff;
   }
   return array;
 }
 
 // array dataHomes query
+async function getDataFromAPI(url, options = {}) {
+  const results = await fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((result) => result)
+    .catch((error) => console.log(error.message));
+  return results;
+}
+
 (async () => {
   let dataHomes;
   if (!sessionStorage.getItem('homes')) {
-    dataHomes = await fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
-      .then((response) => response.json())
-      .then((data1) => data1)
-      .catch((err) => {
-        console.log('Fetch Error :-S', err);
-      });
+    dataHomes = await getDataFromAPI('https://fe-student-api.herokuapp.com/api/hotels/popular');
     sessionStorage.setItem('homes', JSON.stringify(dataHomes));
   } else {
     dataHomes = JSON.parse(sessionStorage.getItem('homes'));
@@ -624,7 +636,6 @@ function slider(arrowNextEl, arrowBackEl, cardsSelector) {
     if (startNumberSlider > 0) {
       homesArrowBackEl.classList.remove('display-none');
     }
-    console.log(homesCardsElements[nextNumberSlider]);
   });
 
   homesArrowBackEl.addEventListener('click', () => {
@@ -653,16 +664,8 @@ formEl.addEventListener('submit', async (event) => {
   event.preventDefault();
   const search1 = formDestinationEl.value.toLowerCase().trim();
 
-  const res = await fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${search1
-  }&dateFrom=${selectedDateCheckIN.getTime()}&dateTo=${selectedDateCheckOut.getTime()}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json();
-    })
-    .then((result) => result)
-    .catch((error) => console.log(error.message));
+  const res = await getDataFromAPI(`https://fe-student-api.herokuapp.com/api/hotels?search=${search1
+  }&dateFrom=${selectedDateCheckIN.getTime()}&dateTo=${selectedDateCheckOut.getTime()}`);
   if (res.length === 0) {
     if (availableHotelsEl.classList.contains('background__successfully')) {
       availableHotelsEl.classList.remove('background__successfully');
@@ -694,5 +697,4 @@ formEl.addEventListener('submit', async (event) => {
     addHomesCards(res, availableCardsEl, 'availableCards');
   }
   slider('available__arrow-next', 'available__arrow-back', '.availableCards');
-  console.log(res);
 });
