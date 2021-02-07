@@ -290,22 +290,22 @@ const nextMonthCalendar = function () {
 // adds html and css to the calendar block
 function createCalendarInHTML(item, calendarElements) {
   const el = document.getElementById(calendarElements);
-  let selectedDayIn;
-  let selectedMonthIn;
-  let selectedYearIn; // split the selected date into other variables
-  let selectedDayOut;
-  let selectedMonthOut;
-  let selectedYearOut;
-  if (selectedDateCheckIN !== undefined) {
-    selectedDayIn = selectedDateCheckIN.getDate();
-    selectedMonthIn = selectedDateCheckIN.getMonth();
-    selectedYearIn = selectedDateCheckIN.getFullYear();
-  }// If the date is not undef, assign a value to the variables
-  if (selectedDateCheckOut !== undefined) {
-    selectedDayOut = selectedDateCheckOut.getDate();
-    selectedMonthOut = selectedDateCheckOut.getMonth();
-    selectedYearOut = selectedDateCheckOut.getFullYear();
-  }
+  // let selectedDayIn;
+  // let selectedMonthIn;
+  // let selectedYearIn; // split the selected date into other variables
+  // let selectedDayOut;
+  // let selectedMonthOut;
+  // let selectedYearOut;
+  // if (selectedDateCheckIN !== undefined) {
+  //   selectedDayIn = selectedDateCheckIN.getDate();
+  //   selectedMonthIn = selectedDateCheckIN.getMonth();
+  //   selectedYearIn = selectedDateCheckIN.getFullYear();
+  // }// If the date is not undef, assign a value to the variables
+  // if (selectedDateCheckOut !== undefined) {
+  //   selectedDayOut = selectedDateCheckOut.getDate();
+  //   selectedMonthOut = selectedDateCheckOut.getMonth();
+  //   selectedYearOut = selectedDateCheckOut.getFullYear();
+  // }
 
   item.forEach((weeks) => {
     const week = document.createElement('div');
@@ -318,15 +318,19 @@ function createCalendarInHTML(item, calendarElements) {
         return;
       }
       // add class to selected days
-      if (days.numberYear === selectedYearIn
-                && days.currentMonth === selectedMonthIn
-                && days.dayOfMonth === selectedDayIn) {
-        day.classList.add('calendar__selected-days');
+      if (selectedDateCheckIN !== undefined) {
+        if (days.numberYear === selectedDateCheckIN.getFullYear()
+           && days.currentMonth === selectedDateCheckIN.getMonth()
+           && days.dayOfMonth === selectedDateCheckIN.getDate()) {
+          day.classList.add('calendar__selected-days');
+        }
       }
-      if (days.numberYear === selectedYearOut
-                && days.currentMonth === selectedMonthOut
-                && days.dayOfMonth === selectedDayOut) {
-        day.classList.add('calendar__selected-days');
+      if (selectedDateCheckOut !== undefined) {
+        if (days.numberYear === selectedDateCheckOut.getFullYear()
+           && days.currentMonth === selectedDateCheckOut.getMonth()
+           && days.dayOfMonth === selectedDateCheckOut.getDate()) {
+          day.classList.add('calendar__selected-days');
+        }
       }
       day.classList.add('cell-days');
       // adding a class to the days gone
