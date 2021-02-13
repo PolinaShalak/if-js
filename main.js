@@ -290,23 +290,6 @@ const nextMonthCalendar = function () {
 // adds html and css to the calendar block
 function createCalendarInHTML(item, calendarElements) {
   const el = document.getElementById(calendarElements);
-  // let selectedDayIn;
-  // let selectedMonthIn;
-  // let selectedYearIn; // split the selected date into other variables
-  // let selectedDayOut;
-  // let selectedMonthOut;
-  // let selectedYearOut;
-  // if (selectedDateCheckIN !== undefined) {
-  //   selectedDayIn = selectedDateCheckIN.getDate();
-  //   selectedMonthIn = selectedDateCheckIN.getMonth();
-  //   selectedYearIn = selectedDateCheckIN.getFullYear();
-  // }// If the date is not undef, assign a value to the variables
-  // if (selectedDateCheckOut !== undefined) {
-  //   selectedDayOut = selectedDateCheckOut.getDate();
-  //   selectedMonthOut = selectedDateCheckOut.getMonth();
-  //   selectedYearOut = selectedDateCheckOut.getFullYear();
-  // }
-
   item.forEach((weeks) => {
     const week = document.createElement('div');
     week.classList.add('calendar__day-of-week');
@@ -561,18 +544,18 @@ function addHomesCards(array, element, nameCards = 'cards') {
 }
 
 function bubbleSort(array) {
-  let counter;
   let buff;
   for (let n = 0; n < array.length; n++) {
+    let wasSwap = false;
     for (let i = 0; i < array.length - 1 - n; i++) {
       if (array[i].name > array[i + 1].name) {
         buff = array[i].name;
         array[i].name = array[i + 1].name;
         array[i + 1].name = buff;
+        wasSwap = true;
       }
     }
-    if (counter === buff) return array;
-    counter = buff;
+    if (!wasSwap) break;
   }
   return array;
 }
