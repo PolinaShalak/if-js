@@ -2,16 +2,20 @@
   "name": "if-js",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/js/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "npx eslint main.js --fix"
+    "lint": "npx eslint main.js --fix",
+    "build": "webpack",
+    "start": "webpack serve"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PolinaShalak/if-js.git"
   },
-  "keywords": [],
+  "keywords": [
+    "webpack"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -19,11 +23,19 @@
   },
   "homepage": "https://github.com/PolinaShalak/if-js#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "html-webpack-plugin": "^5.1.0",
     "husky": "^4.3.0",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "husky": {
     "hooks": {
