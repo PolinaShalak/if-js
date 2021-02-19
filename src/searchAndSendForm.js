@@ -1,4 +1,4 @@
-export default function searchAndSendForm() {
+export function searchAndSendForm() {
     const formEl = document.getElementById('header__form');
     const formDestinationEl = document.getElementById('city');
     const availableHotelsEl = document.getElementById('available--hotels');

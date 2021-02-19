@@ -13,4 +13,5 @@ module.exports = {
         open: true,
         port: 4200,
     },
+    mode: 'development'
 }
