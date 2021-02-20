@@ -1,5 +1,16 @@
-import {slider} from "./slider.js";
-slider('homes__arrow-next', 'homes__arrow-back', '.cards');
+import {slider} from "./slider";
+import {searchAndSendForm} from "./searchAndSendForm";
+import {getDataHomes} from "./dataHomes";
+import {getDataFromAPI} from "./fetch";
+import {calendar} from "./calendar";
 
-import {searchAndSendForm} from "./searchAndSendForm.js";
-searchAndSendForm();
+window.addEventListener(
+    'DOMContentLoaded', () => {
+        calendar();
+        getDataFromAPI();
+        getDataHomes();
+        slider('homes__arrow-next', 'homes__arrow-back', '.cards');
+        searchAndSendForm();
+    }
+)
+

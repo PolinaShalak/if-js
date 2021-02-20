@@ -6,7 +6,6 @@ export function slider(arrowNextEl, arrowBackEl, cardsSelector) {
     let nextNumberSlider = 4;
 
     const homesCardsElements = document.querySelectorAll(cardsSelector);
-    //  console.log(homesCardsElements);
 
     if (homesCardsElements.length <= 3) {
         homesArrowNextEl.classList.add('display-none');
@@ -22,7 +21,6 @@ export function slider(arrowNextEl, arrowBackEl, cardsSelector) {
         }
         startNumberSlider++;
         nextNumberSlider++;
-        console.log(startNumberSlider)
 
         if (startNumberSlider > 0) {
             homesArrowBackEl.classList.remove('display-none');
