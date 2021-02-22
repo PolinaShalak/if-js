@@ -11,6 +11,8 @@
     --gray200: #1d1e1f;
     --gray300: #4d4d4d;
     --background-gray: #eaf0f9;
+    --background-red: rgba(205, 92, 92, 0.15);
+    --background-green: rgba(46, 139, 87, 0.15);
 
     --col-size: calc(100% / 12);
 
@@ -371,6 +373,7 @@ input::placeholder {
     height: 18px;
     position: absolute;
     top: 15px;
+    cursor: pointer;
 }
 
 .calendar__arrow-next {
@@ -387,6 +390,7 @@ input::placeholder {
     font-weight: 500;
     font-size: 18px;
     position: relative;
+    user-select: none;
 }
 
 .calendar__month {
@@ -412,22 +416,37 @@ input::placeholder {
     justify-content: center;
     font-weight: 300;
     font-size: 14px;
+    user-select: none;
 }
 
 .cell-days:hover {
     background-color: var(--secondary-text);
+    cursor: pointer;
 }
 
 .calendar__grey-days:hover {
     background-color: var(--white);
+    cursor: auto;
 }
 
 .calendar__current-day {
     color: var(--primary);
+    cursor: pointer;
 }
 
 .calendar__grey-days {
     color: var(--secondary-text);
+}
+
+.calendar__selected-days {
+    background-color: var(--primary);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.calendar__selected-days:hover {
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 /* Offers */
@@ -442,6 +461,16 @@ input::placeholder {
     align-items: center;
     height: 100px;
     margin-bottom: 48px;
+}
+
+[class*='col'] {
+    flex-grow: 1;
+    padding: 0 8px;
+    fill: var(--primary);
+}
+
+[class*='col-'] {
+    flex-grow: 0;
 }
 
 .text-center {
@@ -487,6 +516,38 @@ input::placeholder {
     height: 84px;
 }
 
+
+/* Available hotels */
+
+.available--text {
+    text-align: center;
+    margin-top: -65px;
+    font-size: 24px;
+}
+
+.background__not-successfully {
+    background-color: var(--background-red);
+}
+
+.background__successfully {
+    background-color: var(--background-green);
+}
+
+.row {
+    position: relative;
+}
+
+.available__svg_arrow-back {
+    top: 30%;
+    left: -0.5%;
+    transform: rotate(180deg);
+}
+
+.available__svg_arrow-next {
+    top: 30%;
+    right: -1%;
+}
+
 /* Homes */
 
 .homes {
@@ -504,12 +565,15 @@ input::placeholder {
 .row {
     font-size: 24px;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .homes__images {
     width: 100%;
-    height: 69%;
+    height: 296px;
     margin-bottom: 15px;
+    user-select: none;
 }
 
 .homes__link {
@@ -526,6 +590,7 @@ input::placeholder {
     width: 48px;
     height: 48px;
     position: absolute;
+    cursor: pointer;
 }
 
 .homes__svg_arrow-back {
@@ -613,7 +678,7 @@ input::placeholder {
     margin: 0 auto;
 }
 
-.best-destinations__fill:hover {
+.best-destinations__fill:hover  {
     background-color: rgba(56, 56, 56, 0.4);
     z-index: 0;
 }
@@ -644,7 +709,7 @@ input::placeholder {
 }
 
 .sign-up .container {
-    padding: 90px 16px 0 16px;
+    padding: 90px 16px 0 16px ;
 }
 
 .sign-up--close {
@@ -1050,8 +1115,58 @@ li {
         width: 100%;
     }
 
+    .header__calendar {
+        top: 50%;
+        right: 23%;
+    }
+
+    [class*='calendar__arrow'] {
+        width: 6px;
+        height: 15px;
+        top: 13px;
+    }
+
+    .calendar__month-year,
+    .calendar__month-name {
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .calendar__month {
+        width: 230px;
+        padding: 10px 20px 16px;
+    }
+
+    .calendar-margin {
+        margin-top: 8px;
+    }
+
+    [class*="cell"] {
+        width: 27px;
+        height: 27px;
+        font-size: 12px;
+    }
+
     .header__apps {
         margin-top: 32px;
+    }
+
+    .title {
+        margin-bottom: 34px;
+        font-size: 36px;
+    }
+
+    .homes__images {
+        margin-bottom: 14px;
+        height: 66%;
+    }
+
+    .homes__text {
+        padding-top: 18px;
+    }
+
+    .offers__text {
+        font-size: 21px;
     }
 
     .offers__svg--support {
@@ -1078,22 +1193,13 @@ li {
         margin-bottom: 20px;
     }
 
+    .text-center {
+        font-size: 36px;
+        margin-bottom: 34px;
+    }
+
     .row {
         font-size: 19px;
-    }
-
-    .title {
-        margin-bottom: 34px;
-        font-size: 36px;
-    }
-
-    .homes__images {
-        margin-bottom: 14px;
-        height: 66%;
-    }
-
-    .homes__text {
-        padding-top: 18px;
     }
 
     .offers__text {
@@ -1156,7 +1262,7 @@ li {
         font-size: 15px;
     }
 
-    li {
+    li  {
         display: flex;
         font-size: 19px;
     }
@@ -1234,6 +1340,37 @@ li {
         display: flex
     }
 
+    .header__calendar {
+        right: 20%;
+    }
+
+    [class*='calendar__arrow'] {
+        width: 6px;
+        height: 13px;
+        top: 11px;
+    }
+
+    .calendar__month-year,
+    .calendar__month-name {
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    .calendar__month {
+        width: 175px;
+        padding: 8px 16px 13px;
+    }
+
+    .calendar-margin {
+        margin-top: 5px;
+    }
+
+    [class*="cell"] {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
     .h1 {
         font-size: 30px;
         padding-top: 50px;
@@ -1245,7 +1382,7 @@ li {
         margin-bottom: 30px;
     }
 
-    .offers .container {
+    .offers .container{
         padding-top: 30px;
     }
 
@@ -1273,7 +1410,7 @@ li {
         margin-bottom: 16px;
     }
 
-    .title {
+    .text-center {
         font-size: 32px;
     }
 
@@ -1293,7 +1430,7 @@ li {
 
     .homes__images {
         margin-bottom: 9px;
-        height: 71%;
+        height: 195px;
     }
 
     .homes__link {
@@ -1336,7 +1473,7 @@ li {
     }
 
     .container.sign-up {
-        padding: 0;
+        padding: 0 ;
     }
 
     .best-destinations__svg_arrow {
@@ -1444,6 +1581,21 @@ li {
         padding: 40px 16px;
     }
 
+    .header__calendar {
+        right: 0;
+    }
+
+    .calendar__month-year,
+    .calendar__month-name {
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .calendar__month {
+        width: 163px;
+        padding: 6px 10px 9px;
+    }
+
     .offers .container {
         padding-top: 24px;
     }
@@ -1457,6 +1609,23 @@ li {
     }
 
     .title {
+        font-size: 28px;
+        margin-bottom: 35px;
+    }
+
+    .offers .container{
+        padding-top: 24px;
+    }
+
+    .col-xs-6 {
+        margin-bottom: 15px;
+    }
+
+    .offers .col-xs-6:last-child {
+        margin-bottom: 0;
+    }
+
+    .text-center {
         font-size: 28px;
         margin-bottom: 35px;
     }
@@ -1510,7 +1679,7 @@ li {
     }
 
     .homes__images {
-        height: 79%;
+        height: 162px;
         margin-bottom: 6px;
         display: flex;
     }
@@ -1525,7 +1694,6 @@ li {
         top: 32%;
         right: -1%;
     }
-
     .best-destinations__tabs {
         justify-content: space-between;
     }
