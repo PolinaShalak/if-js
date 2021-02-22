@@ -1,7 +1,7 @@
-import {slider} from "./slider";
-import {searchAndSendForm} from "./searchAndSendForm";
-import {getDataHomes} from "./dataHomes";
-import {getDataFromAPI} from "./fetch";
+import slider from "./slider";
+import searchAndSendForm from "./searchAndSendForm";
+import getDataHomes from "./dataHomes";
+import getDataFromAPI from "./fetch";
 import {calendar} from "./calendar";
 
 window.addEventListener(

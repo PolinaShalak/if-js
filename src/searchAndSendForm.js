@@ -1,10 +1,10 @@
-import {slider} from "./slider.js";
-import {bubbleSort} from "./bubbleSort";
-import {getDataFromAPI} from "./fetch";
-import {addHomesCards} from "./addBlockHomes";
+import slider from "./slider.js";
+import bubbleSort from "./bubbleSort";
+import getDataFromAPI from "./fetch";
+import addHomesCards from "./addBlockHomes";
 import {selectedDateCheckOut, selectedDateCheckIN} from "./calendar";
 
-export function searchAndSendForm() {
+export default function searchAndSendForm() {
     const formEl = document.getElementById('header__form');
     const formDestinationEl = document.getElementById('city');
     const availableHotelsEl = document.getElementById('available--hotels');

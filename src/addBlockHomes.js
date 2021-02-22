@@ -1,4 +1,4 @@
-export function addHomesCards(array, element, nameCards = 'cards') {
+export default function addHomesCards(array, element, nameCards = 'cards') {
       const screenBrowserWidth = window.screen.availWidth;
     array.forEach((item, index) => {
       const el = document.createElement('div');

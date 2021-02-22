@@ -1,8 +1,8 @@
-import {bubbleSort} from "./bubbleSort";
-import {getDataFromAPI} from "./fetch";
-import {addHomesCards} from "./addBlockHomes";
+import bubbleSort from "./bubbleSort";
+import getDataFromAPI from "./fetch";
+import addHomesCards from "./addBlockHomes";
 
-export function getDataHomes () {
+export default function getDataHomes () {
     (async () => {
         let dataHomes;
         if (!sessionStorage.getItem('homes')) {

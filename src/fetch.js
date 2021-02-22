@@ -1,5 +1,5 @@
 // array dataHomes query
-export async function getDataFromAPI(url, options = {}) {
+export default async function getDataFromAPI(url, options = {}) {
     const results = await fetch(url, options)
         .then((response) => {
             if (!response.ok) {

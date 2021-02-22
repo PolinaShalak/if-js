@@ -1,4 +1,4 @@
-export function bubbleSort(array) {
+export default function bubbleSort(array) {
     let buff;
     for (let n = 0; n < array.length; n++) {
         let wasSwap = false;

@@ -1,4 +1,4 @@
-export function slider(arrowNextEl, arrowBackEl, cardsSelector) {
+export default function slider(arrowNextEl, arrowBackEl, cardsSelector) {
     const homesArrowNextEl = document.getElementById(arrowNextEl);
     const homesArrowBackEl = document.getElementById(arrowBackEl);
 
